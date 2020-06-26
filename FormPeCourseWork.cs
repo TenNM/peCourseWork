@@ -27,6 +27,7 @@ namespace peCourseWork
         const string REALLY_LOAD_TREE_NODE = "Are you really want load tree? " +
             "Current tree will be removed.";
 
+        bool onOrOffTips = true;
         TreeNode treeNode = new TreeNode(NUMBERS);
         public FormPeCourseWork()
         {
@@ -345,6 +346,15 @@ namespace peCourseWork
             }
             else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
             buttons1stFoo();
+        }
+
+        private void enableTipsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (onOrOffTips) 
+            {
+            //off
+            }
+            //on
         }
 
         //-----------------------------------------------------------------------------end
