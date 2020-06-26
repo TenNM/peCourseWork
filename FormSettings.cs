@@ -22,6 +22,7 @@ namespace peCourseWork
         private void checkBoxPrompt_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.ShowPrompts = checkBoxPrompt.Checked;
+            Properties.Settings.Default.Save();
             if (Properties.Settings.Default.ShowPrompts) { checkBoxPrompt.Text = "now on"; }
             else checkBoxPrompt.Text = "now off";
 
@@ -31,6 +32,7 @@ namespace peCourseWork
         private void trackBarPrecision_Scroll(object sender, EventArgs e)
         {
             Properties.Settings.Default.EPSGUI = (byte)trackBarPrecision.Value;
+            Properties.Settings.Default.Save();
             textBox1.Text = Properties.Settings.Default.EPSGUI.ToString();//debug
         }
 

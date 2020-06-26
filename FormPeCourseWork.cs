@@ -6,6 +6,7 @@ namespace peCourseWork
 {
     public partial class FormPeCourseWork : Form
     {
+        #region constants
         const string FILE_IO_PATH = "peFormPeCourseWorkData.bin";
 
         const string ERR_WRONG_TEXTBOX = "Input data is not number";
@@ -27,6 +28,8 @@ namespace peCourseWork
         const string REALLY_LOAD_TREE_NODE = "Are you really want load tree? " +
             "Current tree will be removed.";
 
+        #endregion
+
         // Create the ToolTip and associate with the Form container
         ToolTip toolTip1 = new ToolTip();
         TreeNode treeNode = new TreeNode(NUMBERS);
@@ -38,9 +41,7 @@ namespace peCourseWork
             DrawTreeNodeFrame();
             buttonDelete.AllowDrop = true;
             buttonAdd.AllowDrop = true;
-            //
             this.KeyPreview = true;
-            //this.HelpButton = true;
 
             initializationTip();
         }
@@ -66,7 +67,8 @@ namespace peCourseWork
             object o = e.Node.Tag;
             switch (o)
             {
-                case CoTrigonometric ct: {
+                case CoTrigonometric ct:
+                    {
                         textBoxField1.Text = ct.abs.ToString();//!!!!!!!!!!
                         textBoxField2.Text = ct.fi.ToString();
                     }
@@ -124,7 +126,7 @@ namespace peCourseWork
             toolTip1.InitialDelay = 500;
             toolTip1.ReshowDelay = 400;
             // Force the ToolTip text to be displayed whether or not the form is active.
-            toolTip1.Active = true;
+            toolTip1.Active = Properties.Settings.Default.ShowPrompts;//??????????????
 
             // Set up the ToolTip text for the Button and Checkbox.
             toolTip1.SetToolTip(this.buttonAdd, "Adds an item to the end of the selected branch");
