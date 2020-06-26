@@ -27,6 +27,8 @@ namespace peCourseWork
         const string REALLY_LOAD_TREE_NODE = "Are you really want load tree? " +
             "Current tree will be removed.";
 
+        // Create the ToolTip and associate with the Form container
+        ToolTip toolTip1 = new ToolTip();
         TreeNode treeNode = new TreeNode(NUMBERS);
         public FormPeCourseWork()
         {
@@ -39,6 +41,8 @@ namespace peCourseWork
             //
             this.KeyPreview = true;
             //this.HelpButton = true;
+
+            initializationTip();
         }
 
         protected void DrawTreeNodeFrame()
@@ -96,7 +100,7 @@ namespace peCourseWork
             {
                 case NUMBERS:
                 case COMPLEX: return false;
-                default: return true;               
+                default: return true;
             }
         }
         private bool canWeDamageThisNode(string nodeText)//delete
@@ -110,6 +114,28 @@ namespace peCourseWork
                 case DEVISION: return false;
                 default: return true;
             }
+        }
+
+        private void initializationTip()
+        {
+            
+            // Set up the delays for the ToolTip.
+            toolTip1.AutoPopDelay = 2000;
+            toolTip1.InitialDelay = 500;
+            toolTip1.ReshowDelay = 400;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.Active = true;
+
+            // Set up the ToolTip text for the Button and Checkbox.
+            toolTip1.SetToolTip(this.buttonAdd, "Adds an item to the end of the selected branch");
+            toolTip1.SetToolTip(this.buttonDelete, "Deletes the item at the end of the selected branch");
+            toolTip1.SetToolTip(this.buttonChange, "Changes the item to the end of the selected branch");
+            toolTip1.SetToolTip(this.textBoxField2, "Field2 for displaying data of the corresponding class");
+            toolTip1.SetToolTip(this.textBoxField1, "Field1 for displaying data of the corresponding class");
+            toolTip1.SetToolTip(this.textBoxDebug, "Debug field");
+            toolTip1.SetToolTip(this.treeView1, "Displays class hierarchy");
+            //toolTip1.SetToolTip(this.menuStrip1.fileToolStripMenuItem, "Fail");
+
         }
         //-----------------------------------------------------------------------------process
         private double[] getDataFromTextBoxes()
@@ -324,6 +350,11 @@ namespace peCourseWork
             {
                 delFrTreeNode();
             }
+        }
+
+        private void enableTipsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolTip1.Active = !toolTip1.Active;
         }
         //-----------------------------------------------------------------------------end
     }
