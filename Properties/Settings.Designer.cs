@@ -26,12 +26,24 @@ namespace peCourseWork.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Prompt {
+        public bool ShowPrompts {
             get {
-                return ((bool)(this["Prompt"]));
+                return ((bool)(this["ShowPrompts"]));
             }
             set {
-                this["Prompt"] = value;
+                this["ShowPrompts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public byte EPSGUI {
+            get {
+                return ((byte)(this["EPSGUI"]));
+            }
+            set {
+                this["EPSGUI"] = value;
             }
         }
     }

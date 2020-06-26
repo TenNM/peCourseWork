@@ -15,6 +15,29 @@ namespace peCourseWork
         public FormSettings()
         {
             InitializeComponent();
+            checkBoxPrompt.Checked = Properties.Settings.Default.ShowPrompts;
+            trackBarPrecision.Value = Properties.Settings.Default.EPSGUI;
         }
+        //-------------------------------------------------------------------------------
+        private void checkBoxPrompt_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ShowPrompts = checkBoxPrompt.Checked;
+            if (Properties.Settings.Default.ShowPrompts) { checkBoxPrompt.Text = "now on"; }
+            else checkBoxPrompt.Text = "now off";
+
+            textBox1.Text = Properties.Settings.Default.ShowPrompts.ToString();//debug
+        }
+
+        private void trackBarPrecision_Scroll(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.EPSGUI = (byte)trackBarPrecision.Value;
+            textBox1.Text = Properties.Settings.Default.EPSGUI.ToString();//debug
+        }
+
+        private void buttonForm2SetOk_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        //--------------------------------------------------------------------------end
     }
 }
