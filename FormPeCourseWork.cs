@@ -360,7 +360,7 @@ namespace peCourseWork
             else if (e.Control && e.KeyCode == Keys.Delete) { delFrTreeNode(); }
             else if (e.Control && e.KeyCode == Keys.Tab) { changeTreeNode(); }
         }
-
+        //---------------------------------------------------------------------------
         private void enableTipsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             toolTip1.Active = !toolTip1.Active;
