@@ -277,6 +277,7 @@ namespace peCourseWork
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e){ saveDialogShow(); }
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e){ openDialogShow(); }
         //------------------------------------------------------------------------DragDrop
+        #region DragDrop
         private void buttons1stFoo()
         {
             buttonAdd.Text = BUTTON_TEXT_ADD;
@@ -317,13 +318,21 @@ namespace peCourseWork
             else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
             buttons1stFoo();
         }
+        #endregion
         //---------------------------------------------------------------------------------hot keys
-        private void FormPeCourseWork_KeyPress(object sender, KeyEventArgs e)
+        private void FormPeCourseWork_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && e.Control)
-            {
-                delFrTreeNode();
-            }
+            if (e.KeyCode == Keys.Escape) {}
+
+            else if (e.Alt && e.Control && e.KeyCode == Keys.S) { saveDialogShow(); }
+            else if (e.Alt && e.Control && e.KeyCode == Keys.O) { openDialogShow(); }
+
+            else if (e.Control && e.KeyCode == Keys.S) { saveNoDialog(); }
+            else if (e.Control && e.KeyCode == Keys.O) { openNoDialog(); }
+
+            else if (e.Control && e.KeyCode == Keys.Oemplus) { addInTreeNodeMk2(); }
+            else if (e.Control && e.KeyCode == Keys.Delete) { delFrTreeNode(); }
+            else if (e.Control && e.KeyCode == Keys.Tab) { changeTreeNode(); }
         }
         //-----------------------------------------------------------------------------end
     }
