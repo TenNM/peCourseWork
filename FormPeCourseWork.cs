@@ -302,6 +302,12 @@ namespace peCourseWork
         //-----
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e){ saveDialogShow(); }
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e){ openDialogShow(); }
+        //-----
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSettings fs = new FormSettings();
+            fs.ShowDialog();
+        }
         //------------------------------------------------------------------------DragDrop
         #region DragDrop
         private void buttons1stFoo()
@@ -359,11 +365,6 @@ namespace peCourseWork
             else if (e.Control && e.KeyCode == Keys.Oemplus) { addInTreeNodeMk2(); }
             else if (e.Control && e.KeyCode == Keys.Delete) { delFrTreeNode(); }
             else if (e.Control && e.KeyCode == Keys.Tab) { changeTreeNode(); }
-        }
-        //---------------------------------------------------------------------------
-        private void enableTipsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            toolTip1.Active = !toolTip1.Active;
         }
         //-----------------------------------------------------------------------------end
     }

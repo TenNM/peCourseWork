@@ -44,7 +44,6 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enableTipsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonChange = new System.Windows.Forms.Button();
             this.labelTargetNow = new System.Windows.Forms.Label();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
@@ -184,18 +183,10 @@
             // 
             // settingsToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enableTipsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(92, 29);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // enableTipsToolStripMenuItem
-            // 
-            this.enableTipsToolStripMenuItem.Name = "enableTipsToolStripMenuItem";
-            this.enableTipsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.enableTipsToolStripMenuItem.Text = "On Tips";
-            this.enableTipsToolStripMenuItem.Click += new System.EventHandler(this.enableTipsToolStripMenuItem_Click);
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // buttonChange
             // 
@@ -264,7 +255,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem enableTipsToolStripMenuItem;
     }
 }
 
