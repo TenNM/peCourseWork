@@ -37,6 +37,8 @@ namespace peCourseWork
             buttonDelete.AllowDrop = true;
             buttonAdd.AllowDrop = true;
             //
+            this.KeyPreview = true;
+            //this.HelpButton = true;
         }
 
         protected void DrawTreeNodeFrame()
@@ -164,36 +166,7 @@ namespace peCourseWork
             }
             else MessageBox.Show(ERR_CANT_ADD_IN_THIS_NODE);
             buttons1stFoo();
-        }
-        //private void addInTreeNode()
-        //{
-        //    string treeNodeNow = treeView1.SelectedNode.Text;
-        //    if (canWeAddInThisNode(treeNodeNow))
-        //    {
-        //        string field1 = Service.dotsToCommas(textBoxField1.Text);
-        //        string field2 = Service.dotsToCommas(textBoxField2.Text);
-        //        if (Service.stringIsNumber(field1) && Service.stringIsNumber(field2))
-        //        {
-        //            double field1D = Convert.ToDouble(field1);
-        //            double field2D = Convert.ToDouble(field2);
-
-        //            switch (treeNodeNow)
-        //            {
-        //                case ARITHMETIC: MessageBox.Show("No class " + ARITHMETIC); break;
-        //                case TRIGINOMETRIC:
-        //                    {
-        //                        CoTrigonometric ct = new CoTrigonometric(field1D, field2D);                            
-        //                        treeNode.Nodes[0].Nodes[1].Nodes.Add(ct.ToString());//add only label, no link
-        //                        treeNode.Nodes[0].Nodes[1].LastNode.Tag = ct;
-        //                    }
-        //                    break;
-        //                case DEVISION: MessageBox.Show("No class " + DEVISION); break;
-        //            }                  
-        //        }
-        //        else MessageBox.Show(ERR_WRONG_TEXTBOX);
-        //    }
-        //    else MessageBox.Show(ERR_CANT_ADD_IN_THIS_NODE);
-        //}
+        } 
         private void delFrTreeNode()
         {
             if (canWeDamageThisNode(treeView1.SelectedNode.Text) ){
@@ -233,7 +206,7 @@ namespace peCourseWork
             treeView1.SelectedNode.Text = o.ToString();
             textBoxDebug.Text = o.ToString();//debug
         }
-        //---------------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        //---------------------------------------------------------save/load !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
         private void saveDialogShow()
         {
             Stream myStream;
@@ -278,17 +251,11 @@ namespace peCourseWork
                 }
             }
         }
-        //---------------------------------------------------------------------------------GUI
-        private void buttonAdd_Click(object sender, EventArgs e){ addInTreeNodeMk2(); }
-        private void buttonDelete_Click(object sender, EventArgs e){ delFrTreeNode(); }
-        private void buttonChange_Click(object sender, EventArgs e){ changeTreeNode(); }//!!!!!!
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveNoDialog()
         {
-            FileIOSerializer.saveMk2(treeNode, FILE_IO_PATH);        
+            FileIOSerializer.saveMk2(treeNode, FILE_IO_PATH);
         }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openNoDialog()
         {
             DialogResult result = MessageBox.Show(REALLY_LOAD_TREE_NODE, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
@@ -299,6 +266,14 @@ namespace peCourseWork
                 treeView1.ExpandAll();
             }
         }
+        //---------------------------------------------------------------------------------GUI
+        private void buttonAdd_Click(object sender, EventArgs e){ addInTreeNodeMk2(); }
+        private void buttonDelete_Click(object sender, EventArgs e){ delFrTreeNode(); }
+        private void buttonChange_Click(object sender, EventArgs e){ changeTreeNode(); }//!!!!!!
+        //----
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e){ saveNoDialog();}
+        private void openToolStripMenuItem_Click(object sender, EventArgs e){ openNoDialog(); }
+        //-----
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e){ saveDialogShow(); }
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e){ openDialogShow(); }
         //------------------------------------------------------------------------DragDrop
@@ -312,10 +287,6 @@ namespace peCourseWork
             buttonAdd.Text = BUTTON_TEXT_ADD_2ND;
             buttonChange.Enabled = false;
         }
-        //private void Form1_MouseUp(object sender, MouseEventArgs e)
-        //{
-        //    buttons1stFoo();
-        //}
         //-----
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
@@ -346,7 +317,14 @@ namespace peCourseWork
             else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
             buttons1stFoo();
         }
-
+        //---------------------------------------------------------------------------------hot keys
+        private void FormPeCourseWork_KeyPress(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && e.Control)
+            {
+                delFrTreeNode();
+            }
+        }
         //-----------------------------------------------------------------------------end
     }
 }

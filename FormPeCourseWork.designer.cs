@@ -215,6 +215,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormPeCourseWork";
             this.Text = "FormPeCourseWork";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormPeCourseWork_KeyPress);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
