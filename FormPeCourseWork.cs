@@ -31,7 +31,7 @@ namespace peCourseWork
         #endregion
         #region inits
         // Create the ToolTip and associate with the Form container
-        ToolTip toolTip = new ToolTip();
+        internal ToolTip toolTip = new ToolTip();
         TreeNode treeNode = new TreeNode(NUMBERS);
         public FormPeCourseWork()
         {
@@ -316,6 +316,7 @@ namespace peCourseWork
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormSettings fs = new FormSettings();
+            fs.Owner = this;
             fs.ShowDialog();
         }
         #endregion

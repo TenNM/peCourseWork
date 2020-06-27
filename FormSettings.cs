@@ -2,10 +2,10 @@
 using System.Windows.Forms;
 
 namespace peCourseWork
-{
-    
+{  
     public partial class FormSettings : Form
     {
+        #region init
         ToolTip toolTip1 = new ToolTip();
         public FormSettings()
         {
@@ -13,11 +13,12 @@ namespace peCourseWork
             initializationTip();
             checkBoxPrompt.Checked = Properties.Settings.Default.ShowPrompts;
             trackBarPrecision.Value = Properties.Settings.Default.EPSGUI;
+            if (Properties.Settings.Default.ShowPrompts) { checkBoxPrompt.Text = "now on"; }//!!!!!
+            else checkBoxPrompt.Text = "now off";
         }
 
         private void initializationTip()
         {
-
             // Set up the delays for the ToolTip.
             toolTip1.AutoPopDelay = 2000;
             toolTip1.InitialDelay = 500;
@@ -29,15 +30,14 @@ namespace peCourseWork
             toolTip1.SetToolTip(this.checkBoxPrompt, "designed to turn prompt on or off");
             toolTip1.SetToolTip(this.trackBarPrecision, "designed to round when displayed to user");
             toolTip1.SetToolTip(this.textBox1, "debug");
-
-            //toolTip1.SetToolTip(this.menuStrip1.fileToolStripMenuItem, "Fail");
-
         }
+        #endregion
         //-------------------------------------------------------------------------------
+        #region GUI
         private void checkBoxPrompt_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.ShowPrompts = checkBoxPrompt.Checked;
-            //Properties.Settings.Default.Save();
+
             if (Properties.Settings.Default.ShowPrompts) { checkBoxPrompt.Text = "now on"; }
             else checkBoxPrompt.Text = "now off";
 
@@ -47,21 +47,26 @@ namespace peCourseWork
         private void trackBarPrecision_Scroll(object sender, EventArgs e)
         {
             Properties.Settings.Default.EPSGUI = (byte)trackBarPrecision.Value;
-            //Properties.Settings.Default.Save();
+
             textBox1.Text = Properties.Settings.Default.EPSGUI.ToString();//debug
         }
 
-        private void buttonForm2SetOk_Click(object sender, EventArgs e)
+        private void buttonFormSetOk_Click(object sender, EventArgs e)
         {
-            //this.Close();
             Properties.Settings.Default.Save();
-            this.Close();
+            toolTip1.Active = Properties.Settings.Default.ShowPrompts;
+            (this.Owner as FormPeCourseWork).toolTip.Active = Properties.Settings.Default.ShowPrompts;
+
+            this.Dispose();
+            //this.Close();
         }
 
         private void buttonFormSetCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Dispose();
+            //this.Close();
         }
+        #endregion
         //--------------------------------------------------------------------------end
     }
 }
