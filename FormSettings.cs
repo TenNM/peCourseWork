@@ -10,6 +10,7 @@ namespace peCourseWork
         public FormSettings()
         {
             InitializeComponent();
+            initializationTip();
             checkBoxPrompt.Checked = Properties.Settings.Default.ShowPrompts;
             trackBarPrecision.Value = Properties.Settings.Default.EPSGUI;
         }
@@ -25,13 +26,10 @@ namespace peCourseWork
             toolTip1.Active = Properties.Settings.Default.ShowPrompts;//??????????????
 
             // Set up the ToolTip text for the Button and Checkbox.
-            //toolTip1.SetToolTip(this.buttonAdd, "Adds an item to the end of the selected branch");
-            //toolTip1.SetToolTip(this.buttonDelete, "Deletes the item at the end of the selected branch");
-            //toolTip1.SetToolTip(this.buttonChange, "Changes the item to the end of the selected branch");
-            //toolTip1.SetToolTip(this.textBoxField2, "Field2 for displaying data of the corresponding class");
-            //toolTip1.SetToolTip(this.textBoxField1, "Field1 for displaying data of the corresponding class");
-            //toolTip1.SetToolTip(this.textBoxDebug, "Debug field");
-            //toolTip1.SetToolTip(this.treeView1, "Displays class hierarchy");
+            toolTip1.SetToolTip(this.checkBoxPrompt, "designed to turn prompt on or off");
+            toolTip1.SetToolTip(this.trackBarPrecision, "designed to round when displayed to user");
+            toolTip1.SetToolTip(this.textBox1, "debug");
+
             //toolTip1.SetToolTip(this.menuStrip1.fileToolStripMenuItem, "Fail");
 
         }
