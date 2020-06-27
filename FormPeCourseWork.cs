@@ -83,6 +83,7 @@ namespace peCourseWork
 
         }
         #endregion
+        #region treeView
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)//if u select node
         {
             object o = e.Node.Tag;
@@ -138,8 +139,9 @@ namespace peCourseWork
                 default: return true;
             }
         }
-
+        #endregion
         //-----------------------------------------------------------------------------process
+        #region process
         private double[] getDataFromTextBoxes()
         {
             double[] resArray = new double[2];
@@ -234,7 +236,9 @@ namespace peCourseWork
             treeView1.SelectedNode.Text = o.ToString();
             textBoxDebug.Text = o.ToString();//debug
         }
+        #endregion
         //---------------------------------------------------------save/load !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        #region file IO
         private void saveDialogShow()
         {
             Stream myStream;
@@ -294,11 +298,15 @@ namespace peCourseWork
                 treeView1.ExpandAll();
             }
         }
-        //---------------------------------------------------------------------------------GUI
+        #endregion
+        //---------------------------------------------------------------------------------Buttons
+        #region Buttons
         private void buttonAdd_Click(object sender, EventArgs e){ addInTreeNodeMk2(); }
         private void buttonDelete_Click(object sender, EventArgs e){ delFrTreeNode(); }
         private void buttonChange_Click(object sender, EventArgs e){ changeTreeNode(); }//!!!!!!
-        //----
+        #endregion
+        //---------------------------------------------------------------------------------Menu
+        #region Menu
         private void saveToolStripMenuItem_Click(object sender, EventArgs e){ saveNoDialog();}
         private void openToolStripMenuItem_Click(object sender, EventArgs e){ openNoDialog(); }
         //-----
@@ -310,6 +318,7 @@ namespace peCourseWork
             FormSettings fs = new FormSettings();
             fs.ShowDialog();
         }
+        #endregion
         //------------------------------------------------------------------------DragDrop
         #region DragDrop
         private void buttons1stFoo()
@@ -354,6 +363,7 @@ namespace peCourseWork
         }
         #endregion
         //---------------------------------------------------------------------------------hot keys
+        #region hot keys
         private void FormPeCourseWork_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape) {}
@@ -368,6 +378,7 @@ namespace peCourseWork
             else if (e.Control && e.KeyCode == Keys.Delete) { delFrTreeNode(); }
             else if (e.Control && e.KeyCode == Keys.Tab) { changeTreeNode(); }
         }
+        #endregion
         //-----------------------------------------------------------------------------end
     }
 }
