@@ -34,12 +34,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.trackBarPrecision = new System.Windows.Forms.TrackBar();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonFormSetCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPrecision)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonFormSetOk
             // 
-            this.buttonFormSetOk.Location = new System.Drawing.Point(111, 368);
+            this.buttonFormSetOk.Location = new System.Drawing.Point(229, 372);
             this.buttonFormSetOk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonFormSetOk.Name = "buttonFormSetOk";
             this.buttonFormSetOk.Size = new System.Drawing.Size(171, 63);
@@ -96,11 +97,23 @@
             this.textBox1.Size = new System.Drawing.Size(100, 26);
             this.textBox1.TabIndex = 6;
             // 
+            // buttonFormSetCancel
+            // 
+            this.buttonFormSetCancel.Location = new System.Drawing.Point(42, 372);
+            this.buttonFormSetCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonFormSetCancel.Name = "buttonFormSetCancel";
+            this.buttonFormSetCancel.Size = new System.Drawing.Size(171, 63);
+            this.buttonFormSetCancel.TabIndex = 7;
+            this.buttonFormSetCancel.Text = "Cancel";
+            this.buttonFormSetCancel.UseVisualStyleBackColor = true;
+            this.buttonFormSetCancel.Click += new System.EventHandler(this.buttonFormSetCancel_Click);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(475, 449);
+            this.Controls.Add(this.buttonFormSetCancel);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.trackBarPrecision);
             this.Controls.Add(this.label2);
@@ -123,5 +136,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar trackBarPrecision;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button buttonFormSetCancel;
     }
 }
