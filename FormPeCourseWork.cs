@@ -343,6 +343,7 @@ namespace peCourseWork
             Chart chart = new Chart();
             chart.Location = new Point(16, 220);
             chart.Size = new Size(300, 300);
+            
             //
             ChartArea chartArea = new ChartArea("ChartArea1");
             chart.ChartAreas.Add(chartArea);
@@ -355,12 +356,17 @@ namespace peCourseWork
             //chartArea.AxisY.Title = "y";
             chart.ChartAreas[0].AxisX.Interval = 1;
             chart.ChartAreas[0].AxisY.Interval = 1;
-            chart.ChartAreas[0].AxisX.ScaleView.Zoom(-10, 10);
-            chart.ChartAreas[0].AxisY.ScaleView.Zoom(-10, 10);       
+            chart.ChartAreas[0].AxisX.ScaleView.Zoom(-5, 5);
+            chart.ChartAreas[0].AxisY.ScaleView.Zoom(-5, 5);
+            //chart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            //chart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
 
-            for (int i =0; i<10; i++)
+            chart.ChartAreas[0].AxisX.IsMarginVisible = false;
+            chart.ChartAreas[0].AxisY.IsMarginVisible = false;//default false?
+
+            for (double i = 0; i < 100; i+= 0.1)
             {
-                series.Points.AddXY(i, i);
+                series.Points.AddXY(i, Math.Sin(i) + i);
             }
             //chart.Invalidate();
             //
