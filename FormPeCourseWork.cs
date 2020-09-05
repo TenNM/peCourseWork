@@ -337,32 +337,32 @@ namespace peCourseWork
         }
         private void f1()
         {
-            this.Height = 500;
+            this.Height = 600;
             this.textBoxDebug.Text = this.Height.ToString();//d
 
-            /*Button b = new Button();
-            b.Text = "text";
-            b.Location = new Point(16, 220);
-            b.Size = new Size(50, 50);
-            this.Controls.Add(b);*/
-
-            double[] m = { 1, 2, 3 };
             Chart chart = new Chart();
             chart.Location = new Point(16, 220);
-            chart.Size = new Size(200, 200);
+            chart.Size = new Size(300, 300);
             //
             ChartArea chartArea = new ChartArea("ChartArea1");
             chart.ChartAreas.Add(chartArea);
 
             Series series = new Series("Series1");
-            //chart.series.ChartArea = "ChartArea1";?????????
             chart.Series.Add(series);
+            
+            series.ChartType = SeriesChartType.Line;//new
+            //chartArea.AxisX.Title = "x";
+            //chartArea.AxisY.Title = "y";
+            chart.ChartAreas[0].AxisX.Interval = 1;
+            chart.ChartAreas[0].AxisY.Interval = 1;
+            chart.ChartAreas[0].AxisX.ScaleView.Zoom(-10, 10);
+            chart.ChartAreas[0].AxisY.ScaleView.Zoom(-10, 10);       
 
-            for(int i =0; i<10; i++)
+            for (int i =0; i<10; i++)
             {
                 series.Points.AddXY(i, i);
             }
-            chart.Invalidate();
+            //chart.Invalidate();
             //
             this.Controls.Add(chart);
         }
