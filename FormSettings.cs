@@ -21,7 +21,7 @@ namespace peCourseWork
         {
             // Set up the delays for the ToolTip.
             toolTip1.AutoPopDelay = 2000;
-            toolTip1.InitialDelay = 500;
+            toolTip1.InitialDelay = 400;
             toolTip1.ReshowDelay = 400;
             // Force the ToolTip text to be displayed whether or not the form is active.
             toolTip1.Active = Properties.Settings.Default.ShowPrompts;//??????????????

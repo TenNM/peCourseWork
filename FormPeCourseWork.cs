@@ -83,6 +83,8 @@ namespace peCourseWork
             toolTip.SetToolTip(this.textBoxField1, "Field1 for displaying data of the corresponding class");
             toolTip.SetToolTip(this.textBoxDebug, "Debug field");
             toolTip.SetToolTip(this.treeView1, "Displays class hierarchy");
+            toolTip.SetToolTip(this.menuStrip1, "Toolbar, has a wide range of tools");
+
             //toolTip1.SetToolTip(this.menuStrip1.fileToolStripMenuItem, "Fail");
 
         }
