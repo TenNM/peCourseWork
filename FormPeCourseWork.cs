@@ -148,6 +148,16 @@ namespace peCourseWork
         #endregion
         //-----------------------------------------------------------------------------process
         #region process
+
+        void AskSave() // Ask Save on exit
+        {
+            DialogResult res = MessageBox.Show("save data?", "PeCourseWork", MessageBoxButtons.YesNoCancel);
+            switch (res)
+            {
+                case DialogResult.Yes: { saveNoDialog(); Application.Exit(); } break;
+                case DialogResult.No: Application.Exit(); break; 
+            }
+        }
         private double[] getDataFromTextBoxes()
         {
             double[] resArray = new double[2];
@@ -319,6 +329,9 @@ namespace peCourseWork
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e){ saveDialogShow(); }
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e){ openDialogShow(); }
         //-----
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e){ AskSave();}
+        //-----
+
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormSettings fs = new FormSettings();
@@ -382,7 +395,13 @@ namespace peCourseWork
         #region hot keys
         private void FormPeCourseWork_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape) {}
+            if (e.KeyCode == Keys.Escape)//???????????????????
+            {
+                //e.Modifiers == Keys.Escape
+                if (e.Modifiers == Keys.Escape)
+                    Application.Exit();
+                else AskSave();
+            }
 
             else if (e.Alt && e.Control && e.KeyCode == Keys.S) { saveDialogShow(); }
             else if (e.Alt && e.Control && e.KeyCode == Keys.O) { openDialogShow(); }
@@ -482,6 +501,7 @@ namespace peCourseWork
                 }
             }
         }
+
         #endregion
         //-----------------------------------------------------------------------------end
     }
