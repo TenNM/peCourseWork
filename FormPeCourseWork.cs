@@ -47,7 +47,7 @@ namespace peCourseWork
 
             initializationTip();
 
-            f1();
+            //f1();
         }
 
         protected void DrawTreeNodeFrame()
@@ -328,61 +328,12 @@ namespace peCourseWork
         //-----
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Height = 263;//fix
-            this.textBoxDebug.Text = this.Height.ToString();//d
-
-            foreach(var v in Controls)
-            {
-                if (v.GetType() == typeof(Chart))
-                {
-                    Chart c = v as Chart;
-                    c.Dispose();
-                }
-            }
-
+            f1Close();
         }
         private void f1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //f1();
-            this.Height = 600;//d
-        }
-        private void f1()
-        {
-            this.Height = 600;
-            this.textBoxDebug.Text = this.Height.ToString();//d
-
-            Chart chart = new Chart();
-            chart.Location = new Point(16, 220);
-            chart.Size = new Size(300, 300);
-            toolTip.SetToolTip(chart, "Test");
-            //
-            ChartArea chartArea = new ChartArea("ChartArea1");
-            chart.ChartAreas.Add(chartArea);
-
-            Series series = new Series("Series1");
-            chart.Series.Add(series);
-            
-            series.ChartType = SeriesChartType.Line;//new
-            //chartArea.AxisX.Title = "x";
-            //chartArea.AxisY.Title = "y";
-            chart.ChartAreas[0].AxisX.Interval = 1;
-            chart.ChartAreas[0].AxisY.Interval = 1;
-            chart.ChartAreas[0].AxisX.ScaleView.Zoom(-5, 5);
-            chart.ChartAreas[0].AxisY.ScaleView.Zoom(-5, 5);
-            //chart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            //chart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
-
-            chart.ChartAreas[0].AxisX.IsMarginVisible = false;
-            chart.ChartAreas[0].AxisY.IsMarginVisible = false;//default false?
-
-            for (double i = 0; i < 100; i+= 0.1)
-            {
-                series.Points.AddXY(i, Math.Sin(i) + i);
-            }
-            //chart.Invalidate();
-            //
-            this.Controls.Add(chart);
-        }
+            f1();
+        }      
         #endregion
         //------------------------------------------------------------------------DragDrop
         #region DragDrop
@@ -443,7 +394,93 @@ namespace peCourseWork
             else if (e.Control && e.KeyCode == Keys.Delete) { delFrTreeNode(); }
             else if (e.Control && e.KeyCode == Keys.Tab) { changeTreeNode(); }
 
-            //else if(e.)
+            //else if(e.KeyCode == Keys.Right) { textBoxDebug.Text = "r"; }
+        }
+        #endregion
+        //--------------------------------------------------------------------------foo
+        #region Foo
+        private void f1()
+        {
+            this.Height = 600;
+            this.textBoxDebug.Text = this.Height.ToString();//d
+
+            Chart chart = new Chart();
+            chart.Location = new Point(16, 220);
+            chart.Size = new Size(300, 300);
+            chart.MouseWheel += chart1_MouseWheel;
+            toolTip.SetToolTip(chart, "Test");
+            //
+            ChartArea chartArea = new ChartArea("ChartArea1");
+            chart.ChartAreas.Add(chartArea);
+
+            Series series = new Series("Series1");
+            chart.Series.Add(series);
+
+            series.ChartType = SeriesChartType.Line;//new
+            //chartArea.AxisX.Title = "x";
+            //chartArea.AxisY.Title = "y";
+            chart.ChartAreas[0].AxisX.Interval = 1;
+            chart.ChartAreas[0].AxisY.Interval = 1;
+            //chart.ChartAreas[0].AxisX.ScaleView.Zoom(-5, 5);
+            //chart.ChartAreas[0].AxisY.ScaleView.Zoom(-5, 5);
+            chart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            chart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
+
+            chart.ChartAreas[0].AxisX.IsMarginVisible = false;
+            chart.ChartAreas[0].AxisY.IsMarginVisible = false;//default false?
+
+            for (double i = 0; i < 10; i += 0.1)
+            {
+                series.Points.AddXY(i, Math.Sin(i) + i);
+            }
+            //chart.Invalidate();
+            //
+            this.Controls.Add(chart);
+        }
+        private void chart1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            var chart = (Chart)sender;
+            var xAxis = chart.ChartAreas[0].AxisX;
+            var yAxis = chart.ChartAreas[0].AxisY;
+
+            try
+            {
+                if (e.Delta < 0) // Scrolled down.
+                {
+                    xAxis.ScaleView.ZoomReset();
+                    yAxis.ScaleView.ZoomReset();
+                }
+                else if (e.Delta > 0) // Scrolled up.
+                {
+                    var xMin = xAxis.ScaleView.ViewMinimum;
+                    var xMax = xAxis.ScaleView.ViewMaximum;
+                    var yMin = yAxis.ScaleView.ViewMinimum;
+                    var yMax = yAxis.ScaleView.ViewMaximum;
+
+                    var posXStart = xAxis.PixelPositionToValue(e.Location.X) - (xMax - xMin) / 4;
+                    var posXFinish = xAxis.PixelPositionToValue(e.Location.X) + (xMax - xMin) / 4;
+                    var posYStart = yAxis.PixelPositionToValue(e.Location.Y) - (yMax - yMin) / 4;
+                    var posYFinish = yAxis.PixelPositionToValue(e.Location.Y) + (yMax - yMin) / 4;
+
+                    xAxis.ScaleView.Zoom(posXStart, posXFinish);
+                    yAxis.ScaleView.Zoom(posYStart, posYFinish);
+                }
+            }
+            catch { }
+        }
+        private void f1Close()
+        {
+            this.Height = 263;//fix
+            this.textBoxDebug.Text = this.Height.ToString();//d
+
+            foreach (var v in Controls)
+            {
+                if (v.GetType() == typeof(Chart))
+                {
+                    Chart c = v as Chart;
+                    c.Dispose();
+                }
+            }
         }
         #endregion
         //-----------------------------------------------------------------------------end
