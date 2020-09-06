@@ -329,11 +329,20 @@ namespace peCourseWork
             this.Height = 263;//fix
             this.textBoxDebug.Text = this.Height.ToString();//d
 
-            //del b
+            foreach(var v in Controls)
+            {
+                if (v.GetType() == typeof(Chart))
+                {
+                    Chart c = v as Chart;
+                    c.Dispose();
+                }
+            }
+
         }
         private void f1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            f1();
+            //f1();
+            this.Height = 600;//d
         }
         private void f1()
         {
@@ -343,7 +352,7 @@ namespace peCourseWork
             Chart chart = new Chart();
             chart.Location = new Point(16, 220);
             chart.Size = new Size(300, 300);
-            
+            toolTip.SetToolTip(chart, "Test");
             //
             ChartArea chartArea = new ChartArea("ChartArea1");
             chart.ChartAreas.Add(chartArea);
@@ -431,6 +440,8 @@ namespace peCourseWork
             else if (e.Control && e.KeyCode == Keys.Oemplus) { addInTreeNodeMk2(); }
             else if (e.Control && e.KeyCode == Keys.Delete) { delFrTreeNode(); }
             else if (e.Control && e.KeyCode == Keys.Tab) { changeTreeNode(); }
+
+            //else if(e.)
         }
         #endregion
         //-----------------------------------------------------------------------------end
