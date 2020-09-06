@@ -12,7 +12,9 @@ namespace peCourseWork
             InitializeComponent();
             initializationTip();
             checkBoxPrompt.Checked = Properties.Settings.Default.ShowPrompts;
+            labelPrecision.Text = Properties.Settings.Default.EPSGUI.ToString();
             trackBarPrecision.Value = Properties.Settings.Default.EPSGUI;
+
             if (Properties.Settings.Default.ShowPrompts) { checkBoxPrompt.Text = "now on"; }//!!!!!
             else checkBoxPrompt.Text = "now off";
         }
@@ -42,6 +44,7 @@ namespace peCourseWork
             else checkBoxPrompt.Text = "now off";
 
             textBox1.Text = Properties.Settings.Default.ShowPrompts.ToString();//debug
+            //labelPrecision.Text = Properties.Settings.Default.ShowPrompts.ToString();
         }
 
         private void trackBarPrecision_Scroll(object sender, EventArgs e)
@@ -49,6 +52,7 @@ namespace peCourseWork
             Properties.Settings.Default.EPSGUI = (byte)trackBarPrecision.Value;
 
             textBox1.Text = Properties.Settings.Default.EPSGUI.ToString();//debug
+            labelPrecision.Text = Properties.Settings.Default.EPSGUI.ToString(); 
         }
 
         private void buttonFormSetOk_Click(object sender, EventArgs e)
