@@ -43,6 +43,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,15 +52,13 @@
             this.buttonChange = new System.Windows.Forms.Button();
             this.labelTargetNow = new System.Windows.Forms.Label();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(17, 29);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(2);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(190, 181);
             this.treeView1.TabIndex = 0;
@@ -68,7 +68,7 @@
             // textBoxField1
             // 
             this.textBoxField1.Location = new System.Drawing.Point(287, 32);
-            this.textBoxField1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxField1.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxField1.Name = "textBoxField1";
             this.textBoxField1.Size = new System.Drawing.Size(121, 20);
             this.textBoxField1.TabIndex = 1;
@@ -76,7 +76,7 @@
             // textBoxField2
             // 
             this.textBoxField2.Location = new System.Drawing.Point(287, 65);
-            this.textBoxField2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxField2.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxField2.Name = "textBoxField2";
             this.textBoxField2.Size = new System.Drawing.Size(121, 20);
             this.textBoxField2.TabIndex = 2;
@@ -104,7 +104,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Location = new System.Drawing.Point(220, 106);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(53, 52);
             this.buttonAdd.TabIndex = 5;
@@ -117,7 +117,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Location = new System.Drawing.Point(287, 106);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(53, 52);
             this.buttonDelete.TabIndex = 6;
@@ -130,7 +130,7 @@
             // textBoxDebug
             // 
             this.textBoxDebug.Location = new System.Drawing.Point(219, 192);
-            this.textBoxDebug.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxDebug.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxDebug.Name = "textBoxDebug";
             this.textBoxDebug.Size = new System.Drawing.Size(189, 20);
             this.textBoxDebug.TabIndex = 7;
@@ -166,35 +166,47 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.loadToolStripMenuItem.Text = "Open";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.openFileToolStripMenuItem.Text = "Open file";
             this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(119, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -229,7 +241,7 @@
             // buttonChange
             // 
             this.buttonChange.Location = new System.Drawing.Point(353, 106);
-            this.buttonChange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonChange.Margin = new System.Windows.Forms.Padding(2);
             this.buttonChange.Name = "buttonChange";
             this.buttonChange.Size = new System.Drawing.Size(53, 52);
             this.buttonChange.TabIndex = 9;
@@ -246,18 +258,6 @@
             this.labelTargetNow.Size = new System.Drawing.Size(61, 13);
             this.labelTargetNow.TabIndex = 10;
             this.labelTargetNow.Text = "Target now";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // FormPeCourseWork
             // 
@@ -276,7 +276,7 @@
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormPeCourseWork";
             this.Text = "FormPeCourseWork";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormPeCourseWork_KeyUp);

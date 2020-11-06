@@ -99,7 +99,6 @@ namespace peCourseWork
                     {
                         textBoxField1.Text = ct.abs.ToString();//!!!!!!!!!!
                         textBoxField2.Text = ct.fi.ToString();
-                        labelField1.Text = "";
                     }
                     break;
 
@@ -419,8 +418,49 @@ namespace peCourseWork
         #endregion
         //--------------------------------------------------------------------------foo
         #region Foo
-        private void DrawChart()
+
+        private void buttonDrawClic(object sender, EventArgs e)
+        { 
+        }
+        private void textBoxComboBox()
         {
+            //-------TextBox
+            TextBox textBoxX = new TextBox();
+            textBoxX.Location = new Point(16, 245);
+            textBoxX.Size = new Size(100, 50);
+            this.Controls.Add(textBoxX);
+
+            TextBox textBoxY = new TextBox();
+            textBoxY.Location = new Point(216, 245);
+            textBoxY.Size = new Size(100, 50);
+            this.Controls.Add(textBoxY);
+
+            //-------ComboBox
+
+            string[] operation = { "+", "-", "x", "/" }; 
+
+            ComboBox comboBox = new ComboBox();
+            comboBox.Location = new Point(146, 245);
+            comboBox.Size = new Size(40, 50);
+            comboBox.Items.AddRange(operation);
+            comboBox.Font = new System.Drawing.Font("", 11);//"Times New Roman"
+            this.Controls.Add(comboBox);
+
+            //-------Button
+            Button buttonDraw = new Button();
+            buttonDraw.Location = new Point(346, 245);
+            buttonDraw.Size = new Size(80, 20);
+            buttonDraw.Text = "Draw";
+            buttonDraw.Click += buttonDrawClic;
+            this.Controls.Add(buttonDraw);
+        }
+        private void f1()
+        {
+            this.Height = 700;//600
+            this.textBoxDebug.Text = this.Height.ToString();//d
+
+            textBoxComboBox();
+
             Chart chart = new Chart();
             chart.Location = new Point(16, 280);// 16 220 
             chart.Size = new Size(350, 350);
@@ -428,7 +468,7 @@ namespace peCourseWork
             toolTip.SetToolTip(chart, "Test");
             //
             ChartArea chartArea = new ChartArea("ChartArea1");
-            chart.ChartAreas.Add(chartArea);
+            chart.ChartAreas.Add(chartArea);          
             //chartArea.AxisX.Title = "x";
             //chartArea.AxisY.Title = "y";
             chart.ChartAreas[0].AxisX.Interval = 1;
@@ -440,23 +480,23 @@ namespace peCourseWork
 
             chart.ChartAreas[0].AxisX.IsMarginVisible = false;
             chart.ChartAreas[0].AxisY.IsMarginVisible = false;//default false?
-
+                                  
             //s1
             Series series1 = new Series("Series1");
-            series1.ChartType = SeriesChartType.Line;
             chart.Series.Add(series1);
+            series1.ChartType = SeriesChartType.Line;//new
             //s1
 
             //s2
             Series series2 = new Series("Series2");
-            series2.ChartType = SeriesChartType.Line;
             chart.Series.Add(series2);
+            series2.ChartType = SeriesChartType.Line;
             //s2
 
             //s3
             Series series3 = new Series("Series3");
-            series3.ChartType = SeriesChartType.Line;
             chart.Series.Add(series3);
+            series3.ChartType = SeriesChartType.Line;
             //s3
 
             series1.Points.AddXY(0, 0);
@@ -467,15 +507,9 @@ namespace peCourseWork
 
             series3.Points.AddXY(0, 0);
             series3.Points.AddXY(1, 1);
-
+            //chart.Invalidate();
+            //
             this.Controls.Add(chart);
-        }
-        private void f1()
-        {
-            this.Height = 700;//600
-            this.textBoxDebug.Text = this.Height.ToString();//d
-
-            DrawChart();
         }
         private void chart1_MouseWheel(object sender, MouseEventArgs e)
         {
