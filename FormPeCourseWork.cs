@@ -35,6 +35,8 @@ namespace peCourseWork
         // Create the ToolTip and associate with the Form container
         internal ToolTip toolTip = new ToolTip();
         TreeNode treeNode = new TreeNode(NUMBERS);
+        SpecialNumbers sn1;
+        SpecialNumbers sn2;
         public FormPeCourseWork()
         {
             InitializeComponent();
@@ -47,7 +49,8 @@ namespace peCourseWork
 
             initializationTip();
 
-            //f1();
+            f1();//d
+            openNoDialog();//d
         }
 
         protected void DrawTreeNodeFrame()
@@ -390,6 +393,40 @@ namespace peCourseWork
             else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
             buttons1stFoo();
         }
+        //---
+        private void TextBox_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.AllowedEffect;
+        }
+
+        private void textBox_DragDrop(object sender, DragEventArgs e)
+        {
+            foreach (object o in Controls)
+            {
+                if(o as TextBox != null)
+                {
+                    TextBox tb = o as TextBox;
+                    //if (tb.Name.Equals("textBoxX"))
+                    {
+                        if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
+                        {
+                            if (tb.Name.Equals("textBoxX"))
+                            {
+                                tb.Text = treeView1.SelectedNode.Text;
+                                sn1 = treeView1.SelectedNode.Tag as SpecialNumbers;
+                            }
+                            else if (tb.Name.Equals("textBoxY"))
+                            {
+                                tb.Text = treeView1.SelectedNode.Text;
+                                sn2 = treeView1.SelectedNode.Tag as SpecialNumbers;
+                            }
+                            return;
+                        }
+                        else MessageBox.Show("!!!!!!!!");
+                    }
+                }//!null
+            }
+        }
         #endregion
         //---------------------------------------------------------------------------------hot keys
         #region hot keys
@@ -420,7 +457,8 @@ namespace peCourseWork
         #region Foo
 
         private void buttonDrawClic(object sender, EventArgs e)
-        { 
+        {
+            textBoxDebug.Text = "bDrawClick";
         }
         private void textBoxComboBox()
         {
@@ -428,11 +466,19 @@ namespace peCourseWork
             TextBox textBoxX = new TextBox();
             textBoxX.Location = new Point(16, 245);
             textBoxX.Size = new Size(100, 50);
+            textBoxX.AllowDrop = true;
+            textBoxX.DragEnter += TextBox_DragEnter;
+            textBoxX.DragEnter += textBox_DragDrop;
+            textBoxX.Name = "textBoxX";
             this.Controls.Add(textBoxX);
 
             TextBox textBoxY = new TextBox();
             textBoxY.Location = new Point(216, 245);
             textBoxY.Size = new Size(100, 50);
+            textBoxY.AllowDrop = true;
+            textBoxY.DragEnter += TextBox_DragEnter;
+            textBoxY.DragEnter += textBox_DragDrop;
+            textBoxY.Name = "textBoxY";
             this.Controls.Add(textBoxY);
 
             //-------ComboBox
@@ -454,13 +500,9 @@ namespace peCourseWork
             buttonDraw.Click += buttonDrawClic;
             this.Controls.Add(buttonDraw);
         }
-        private void f1()
+
+        private void DrawChart()
         {
-            this.Height = 700;//600
-            this.textBoxDebug.Text = this.Height.ToString();//d
-
-            textBoxComboBox();
-
             Chart chart = new Chart();
             chart.Location = new Point(16, 280);// 16 220 
             chart.Size = new Size(350, 350);
@@ -468,7 +510,7 @@ namespace peCourseWork
             toolTip.SetToolTip(chart, "Test");
             //
             ChartArea chartArea = new ChartArea("ChartArea1");
-            chart.ChartAreas.Add(chartArea);          
+            chart.ChartAreas.Add(chartArea);
             //chartArea.AxisX.Title = "x";
             //chartArea.AxisY.Title = "y";
             chart.ChartAreas[0].AxisX.Interval = 1;
@@ -480,23 +522,23 @@ namespace peCourseWork
 
             chart.ChartAreas[0].AxisX.IsMarginVisible = false;
             chart.ChartAreas[0].AxisY.IsMarginVisible = false;//default false?
-                                  
+
             //s1
             Series series1 = new Series("Series1");
+            series1.ChartType = SeriesChartType.Line;
             chart.Series.Add(series1);
-            series1.ChartType = SeriesChartType.Line;//new
             //s1
 
             //s2
             Series series2 = new Series("Series2");
-            chart.Series.Add(series2);
             series2.ChartType = SeriesChartType.Line;
+            chart.Series.Add(series2);
             //s2
 
             //s3
             Series series3 = new Series("Series3");
-            chart.Series.Add(series3);
             series3.ChartType = SeriesChartType.Line;
+            chart.Series.Add(series3);
             //s3
 
             series1.Points.AddXY(0, 0);
@@ -510,6 +552,14 @@ namespace peCourseWork
             //chart.Invalidate();
             //
             this.Controls.Add(chart);
+        }
+        private void f1()
+        {
+            this.Height = 700;//600
+            this.textBoxDebug.Text = this.Height.ToString();//d
+
+            textBoxComboBox();
+            DrawChart();          
         }
         private void chart1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -561,7 +611,7 @@ namespace peCourseWork
                     case Series s: s.Dispose(); break;
                 }
             }
-        }//m
+        }//delete buttons and other
 
         #endregion
         //-----------------------------------------------------------------------------end
