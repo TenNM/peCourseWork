@@ -398,35 +398,34 @@ namespace peCourseWork
         {
             e.Effect = e.AllowedEffect;
         }
-
-        private void textBox_DragDrop(object sender, DragEventArgs e)
+        private void TextBox_DragDrop(object sender, DragEventArgs e)
         {
-            foreach (object o in Controls)
+            TextBox tb = sender as TextBox;
+
+            if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
             {
-                if(o as TextBox != null)
+                if (tb.Name.Equals("textBoxX"))
                 {
-                    TextBox tb = o as TextBox;
-                    //if (tb.Name.Equals("textBoxX"))
-                    {
-                        if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
-                        {
-                            if (tb.Name.Equals("textBoxX"))
-                            {
-                                tb.Text = treeView1.SelectedNode.Text;
-                                sn1 = treeView1.SelectedNode.Tag as SpecialNumbers;
-                            }
-                            else if (tb.Name.Equals("textBoxY"))
-                            {
-                                tb.Text = treeView1.SelectedNode.Text;
-                                sn2 = treeView1.SelectedNode.Tag as SpecialNumbers;
-                            }
-                            return;
-                        }
-                        else MessageBox.Show("!!!!!!!!");
-                    }
-                }//!null
+                    tb.Text = treeView1.SelectedNode.Text;
+                    sn1 = treeView1.SelectedNode.Tag as SpecialNumbers;
+                    DrawSpecialNumOnGraph(sn1, "Series1");
+                }
+                else if (tb.Name.Equals("textBoxY"))
+                {
+                    tb.Text = treeView1.SelectedNode.Text;
+                    sn2 = treeView1.SelectedNode.Tag as SpecialNumbers;
+                    DrawSpecialNumOnGraph(sn2, "Series2");
+                }
+                //break;
+            }//node
+            else
+            {
+                return;
+                MessageBox.Show("!!!!!!!!");//?????????????????????????????????
             }
-        }
+                
+            
+        }//m
         #endregion
         //---------------------------------------------------------------------------------hot keys
         #region hot keys
@@ -455,12 +454,50 @@ namespace peCourseWork
         #endregion
         //--------------------------------------------------------------------------foo
         #region Foo
-
+        private void DrawSpecialNumOnGraph(SpecialNumbers sn, string seriesName)
+        {
+            Chart c = null;
+            foreach (object o in Controls)
+            {
+                if(o is Chart)
+                {
+                    c = o as Chart;
+                    break;
+                }
+            }
+            if(c != null)
+            {
+                var seriesArr = c.Series;
+                Series s = null;
+                switch (seriesName)
+                {
+                    case "Series1":
+                    case "Series2":
+                    case "Series3": s = seriesArr.FindByName(seriesName); break;
+                }
+                if(s != null)
+                {
+                    s.Points.Clear();//!!!!!!!!!!!!!!!!1
+                    s.Points.AddXY(0, 0);//!!!!!!!!!!!!!!!!!!!!
+                    switch (sn)
+                    {
+                        case Fraction f: s.Points.AddXY(f.fractionToDouble(), 0); break;
+                        case CoArith ca: s.Points.AddXY(ca.re, ca.im); break;
+                        case CoTrigonometric ct:
+                            {
+                                CoArith coArithTemp = ct.convertToArith();
+                                s.Points.AddXY(coArithTemp.re, coArithTemp.im);
+                            } break;
+                    }
+                }
+                //series1.Points.AddXY(0, 0);
+            }
+        }//m
         private void buttonDrawClic(object sender, EventArgs e)
         {
             textBoxDebug.Text = "bDrawClick";
         }
-        private void textBoxComboBox()
+        private void DrawTextBoxComboBox()
         {
             //-------TextBox
             TextBox textBoxX = new TextBox();
@@ -468,8 +505,9 @@ namespace peCourseWork
             textBoxX.Size = new Size(100, 50);
             textBoxX.AllowDrop = true;
             textBoxX.DragEnter += TextBox_DragEnter;
-            textBoxX.DragEnter += textBox_DragDrop;
+            textBoxX.DragEnter += TextBox_DragDrop;
             textBoxX.Name = "textBoxX";
+            textBoxX.ReadOnly = true;
             this.Controls.Add(textBoxX);
 
             TextBox textBoxY = new TextBox();
@@ -477,8 +515,9 @@ namespace peCourseWork
             textBoxY.Size = new Size(100, 50);
             textBoxY.AllowDrop = true;
             textBoxY.DragEnter += TextBox_DragEnter;
-            textBoxY.DragEnter += textBox_DragDrop;
+            textBoxY.DragEnter += TextBox_DragDrop;
             textBoxY.Name = "textBoxY";
+            textBoxY.ReadOnly = true;
             this.Controls.Add(textBoxY);
 
             //-------ComboBox
@@ -500,7 +539,6 @@ namespace peCourseWork
             buttonDraw.Click += buttonDrawClic;
             this.Controls.Add(buttonDraw);
         }
-
         private void DrawChart()
         {
             Chart chart = new Chart();
@@ -541,16 +579,6 @@ namespace peCourseWork
             chart.Series.Add(series3);
             //s3
 
-            series1.Points.AddXY(0, 0);
-            series1.Points.AddXY(0, 1);
-
-            series2.Points.AddXY(0, 0);
-            series2.Points.AddXY(1, 0);
-
-            series3.Points.AddXY(0, 0);
-            series3.Points.AddXY(1, 1);
-            //chart.Invalidate();
-            //
             this.Controls.Add(chart);
         }
         private void f1()
@@ -558,7 +586,7 @@ namespace peCourseWork
             this.Height = 700;//600
             this.textBoxDebug.Text = this.Height.ToString();//d
 
-            textBoxComboBox();
+            DrawTextBoxComboBox();
             DrawChart();          
         }
         private void chart1_MouseWheel(object sender, MouseEventArgs e)

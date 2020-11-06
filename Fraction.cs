@@ -51,6 +51,11 @@ namespace peCourseWork
                 }          
             }
         }
+        internal double fractionToDouble()
+        {
+            if (den != 0) return num / den;
+            else throw new Exception(ERR_DIVISION_BY_ZERO);
+        }
         //-----------------------------------------------------------------------------unary static
         //-----------------------------------------------------------------------------binary obj style
         //-----------------------------------------------------------------------------binary static
