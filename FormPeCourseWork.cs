@@ -418,10 +418,48 @@ namespace peCourseWork
         #endregion
         //--------------------------------------------------------------------------foo
         #region Foo
+
+        private void buttonDrawClic(object sender, EventArgs e)
+        { 
+        }
+        private void textBoxComboBox()
+        {
+            //-------TextBox
+            TextBox textBoxX = new TextBox();
+            textBoxX.Location = new Point(16, 245);
+            textBoxX.Size = new Size(100, 50);
+            this.Controls.Add(textBoxX);
+
+            TextBox textBoxY = new TextBox();
+            textBoxY.Location = new Point(216, 245);
+            textBoxY.Size = new Size(100, 50);
+            this.Controls.Add(textBoxY);
+
+            //-------ComboBox
+
+            string[] operation = { "+", "-", "x", "/" }; 
+
+            ComboBox comboBox = new ComboBox();
+            comboBox.Location = new Point(146, 245);
+            comboBox.Size = new Size(40, 50);
+            comboBox.Items.AddRange(operation);
+            comboBox.Font = new System.Drawing.Font("", 11);//"Times New Roman"
+            this.Controls.Add(comboBox);
+
+            //-------Button
+            Button buttonDraw = new Button();
+            buttonDraw.Location = new Point(346, 245);
+            buttonDraw.Size = new Size(80, 20);
+            buttonDraw.Text = "Draw";
+            buttonDraw.Click += buttonDrawClic;
+            this.Controls.Add(buttonDraw);
+        }
         private void f1()
         {
             this.Height = 700;//600
             this.textBoxDebug.Text = this.Height.ToString();//d
+
+            textBoxComboBox();
 
             Chart chart = new Chart();
             chart.Location = new Point(16, 280);// 16 220 
@@ -442,7 +480,7 @@ namespace peCourseWork
 
             chart.ChartAreas[0].AxisX.IsMarginVisible = false;
             chart.ChartAreas[0].AxisY.IsMarginVisible = false;//default false?
-            
+                                  
             //s1
             Series series1 = new Series("Series1");
             chart.Series.Add(series1);
