@@ -420,22 +420,17 @@ namespace peCourseWork
         #region Foo
         private void f1()
         {
-            this.Height = 600;
+            this.Height = 700;//600
             this.textBoxDebug.Text = this.Height.ToString();//d
 
             Chart chart = new Chart();
-            chart.Location = new Point(16, 220);
-            chart.Size = new Size(300, 300);
+            chart.Location = new Point(16, 280);// 16 220 
+            chart.Size = new Size(350, 350);
             chart.MouseWheel += chart1_MouseWheel;
             toolTip.SetToolTip(chart, "Test");
             //
             ChartArea chartArea = new ChartArea("ChartArea1");
-            chart.ChartAreas.Add(chartArea);
-
-            Series series = new Series("Series1");
-            chart.Series.Add(series);
-
-            series.ChartType = SeriesChartType.Line;//new
+            chart.ChartAreas.Add(chartArea);          
             //chartArea.AxisX.Title = "x";
             //chartArea.AxisY.Title = "y";
             chart.ChartAreas[0].AxisX.Interval = 1;
@@ -447,11 +442,33 @@ namespace peCourseWork
 
             chart.ChartAreas[0].AxisX.IsMarginVisible = false;
             chart.ChartAreas[0].AxisY.IsMarginVisible = false;//default false?
+            
+            //s1
+            Series series1 = new Series("Series1");
+            chart.Series.Add(series1);
+            series1.ChartType = SeriesChartType.Line;//new
+            //s1
 
-            for (double i = 0; i < 10; i += 0.1)
-            {
-                series.Points.AddXY(i, Math.Sin(i) + i);
-            }
+            //s2
+            Series series2 = new Series("Series2");
+            chart.Series.Add(series2);
+            series2.ChartType = SeriesChartType.Line;
+            //s2
+
+            //s3
+            Series series3 = new Series("Series3");
+            chart.Series.Add(series3);
+            series3.ChartType = SeriesChartType.Line;
+            //s3
+
+            series1.Points.AddXY(0, 0);
+            series1.Points.AddXY(0, 1);
+
+            series2.Points.AddXY(0, 0);
+            series2.Points.AddXY(1, 0);
+
+            series3.Points.AddXY(0, 0);
+            series3.Points.AddXY(1, 1);
             //chart.Invalidate();
             //
             this.Controls.Add(chart);
@@ -492,15 +509,21 @@ namespace peCourseWork
             this.Height = 263;//fix
             this.textBoxDebug.Text = this.Height.ToString();//d
 
-            foreach (var v in Controls)
+            foreach (object o in Controls)
             {
-                if (v.GetType() == typeof(Chart))
+                /*if (v.GetType() == typeof(Chart))
                 {
                     Chart c = v as Chart;
                     c.Dispose();
+                }*/
+                switch (o)
+                {
+                    case Chart c: c.Dispose(); break;
+                    case ChartArea ca: ca.Dispose(); break;
+                    case Series s: s.Dispose(); break;
                 }
             }
-        }
+        }//m
 
         #endregion
         //-----------------------------------------------------------------------------end
