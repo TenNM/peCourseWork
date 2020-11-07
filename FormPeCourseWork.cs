@@ -539,6 +539,24 @@ namespace peCourseWork
                 }              
             }
         }
+
+        private void buttonDrawClear(object sender, EventArgs e)
+        {
+            Chart findeCr = FindControl("DrawChart") as Chart;
+            TextBox findTextBoxX = FindControl("textBoxX") as TextBox;
+            TextBox findTextBoxY = FindControl("textBoxY") as TextBox;
+
+            if (findeCr != null && findTextBoxX.Text != null && findTextBoxY != null)
+            {
+                findeCr.Series[0].Points.Clear();
+                findeCr.Series[1].Points.Clear();
+                findeCr.Series[2].Points.Clear();
+                findTextBoxX.Text = "";
+                findTextBoxY.Text = "";
+                sn1 = null;
+                sn2 = null;
+            }
+        }
         private void DrawTextBoxComboBox()
         {
             //-------TextBox
@@ -581,10 +599,18 @@ namespace peCourseWork
             buttonDraw.Text = "Draw";
             buttonDraw.Click += buttonDrawClick;
             this.Controls.Add(buttonDraw);
+
+            Button buttonClear = new Button();
+            buttonClear.Location = new Point(385, 580);
+            buttonClear.Size = new Size(50, 50);
+            buttonClear.Text = "Clear";
+            buttonClear.Click += buttonDrawClear;
+            this.Controls.Add(buttonClear);
         }
         private void DrawChart()
         {
             Chart chart = new Chart();
+            chart.Name = "DrawChart";
             chart.Location = new Point(16, 280);// 16 220 
             chart.Size = new Size(350, 350);
             chart.MouseWheel += chart1_MouseWheel;
