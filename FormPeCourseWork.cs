@@ -565,6 +565,7 @@ namespace peCourseWork
             Series series1 = new Series("Series1");
             series1.ChartType = SeriesChartType.Line;
             chart.Series.Add(series1);
+
             //s1
 
             //s2
