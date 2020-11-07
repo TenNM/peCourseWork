@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -458,6 +459,25 @@ namespace peCourseWork
         #endregion
         //--------------------------------------------------------------------------foo
         #region Foo
+        private object FindControl(string name)
+        { 
+            foreach(Control c in Controls)
+            {
+                if (c.Name.Equals(name)) return c;
+            }
+            return null;
+        }
+        //-------------------------------------------
+        private CoArith SpecialNumToCoArith(SpecialNumbers sn)
+        {
+            switch (sn)
+            {
+                case CoArith ca: return sn as CoArith;
+                case CoTrigonometric ct: return (sn as CoTrigonometric).convertToArith();
+                case Fraction f: return new CoArith(f.fractionToDouble(), 0);
+                default: return null;
+            }
+        }
         private void DrawSpecialNumOnGraph(SpecialNumbers sn, string seriesName)
         {
             Chart c = null;
@@ -497,9 +517,27 @@ namespace peCourseWork
                 //series1.Points.AddXY(0, 0);
             }
         }//m
-        private void buttonDrawClic(object sender, EventArgs e)
+        private void buttonDrawClick(object sender, EventArgs e)
         {
-            textBoxDebug.Text = "bDrawClick";
+            textBoxDebug.Text = "bDrawClick";//b
+            SpecialNumbers snRes = null;
+
+            if (sn1 != null && sn2 != null)
+            {
+                ComboBox findedCb = FindControl("comboBoxF1Operations") as ComboBox;
+                if(findedCb != null)
+                {
+                    switch (findedCb.SelectedItem)
+                    {
+                        case "+": snRes = SpecialNumToCoArith(sn1) + SpecialNumToCoArith(sn2); break;
+                        case "-": snRes = SpecialNumToCoArith(sn1) - SpecialNumToCoArith(sn2); break;
+                        case "x": snRes = SpecialNumToCoArith(sn1) * SpecialNumToCoArith(sn2); break;
+                        case "/": snRes = SpecialNumToCoArith(sn1) / SpecialNumToCoArith(sn2); break;
+                        default: return;
+                    }                  
+                    DrawSpecialNumOnGraph(snRes, "Series3");
+                }              
+            }
         }
         private void DrawTextBoxComboBox()
         {
@@ -533,6 +571,7 @@ namespace peCourseWork
             comboBox.Size = new Size(40, 50);
             comboBox.Items.AddRange(operation);
             comboBox.Font = new System.Drawing.Font("", 11);//"Times New Roman"
+            comboBox.Name = "comboBoxF1Operations";
             this.Controls.Add(comboBox);
 
             //-------Button
@@ -540,7 +579,7 @@ namespace peCourseWork
             buttonDraw.Location = new Point(346, 245);
             buttonDraw.Size = new Size(80, 20);
             buttonDraw.Text = "Draw";
-            buttonDraw.Click += buttonDrawClic;
+            buttonDraw.Click += buttonDrawClick;
             this.Controls.Add(buttonDraw);
         }
         private void DrawChart()
@@ -555,6 +594,7 @@ namespace peCourseWork
             chart.ChartAreas.Add(chartArea);
             //chartArea.AxisX.Title = "x";
             //chartArea.AxisY.Title = "y";
+
             chart.ChartAreas[0].AxisX.Interval = 1;
             chart.ChartAreas[0].AxisY.Interval = 1;
             //chart.ChartAreas[0].AxisX.ScaleView.Zoom(-5, 5);
@@ -569,18 +609,21 @@ namespace peCourseWork
             Series series1 = new Series("Series1");
             series1.ChartType = SeriesChartType.Line;
             chart.Series.Add(series1);
+            chart.Series[0].BorderWidth = 5;
             //s1
 
             //s2
             Series series2 = new Series("Series2");
             series2.ChartType = SeriesChartType.Line;
             chart.Series.Add(series2);
+            chart.Series[1].BorderWidth = 5;
             //s2
 
             //s3
             Series series3 = new Series("Series3");
             series3.ChartType = SeriesChartType.Line;
             chart.Series.Add(series3);
+            chart.Series[2].BorderWidth = 5;
             //s3
 
             this.Controls.Add(chart);
