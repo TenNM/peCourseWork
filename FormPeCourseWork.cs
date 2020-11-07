@@ -35,8 +35,8 @@ namespace peCourseWork
         // Create the ToolTip and associate with the Form container
         internal ToolTip toolTip = new ToolTip();
         TreeNode treeNode = new TreeNode(NUMBERS);
-        SpecialNumbers sn1;
-        SpecialNumbers sn2;
+        CoArith globalCA1;
+        CoArith globalCA2;
         public FormPeCourseWork()
         {
             InitializeComponent();
@@ -402,23 +402,29 @@ namespace peCourseWork
         {
             TextBox tb = sender as TextBox;
 
-            if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
+            //if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
             {
                 if (tb.Name.Equals("textBoxX"))
                 {
-                    tb.Text = treeView1.SelectedNode.Text;
-                    sn1 = treeView1.SelectedNode.Tag as SpecialNumbers;
-                    DrawSpecialNumOnGraph(sn1, "Series1");
+                    //tb.Text = treeView1.SelectedNode.Text;
+                    //tb.Text = e.Data.GetData;
+
+                    //globalCA1 = treeView1.SelectedNode.Tag as SpecialNumbers;
+                    globalCA1 = objToCoArith(treeView1.SelectedNode.Tag);
+                    DrawSpecialNumOnGraph(globalCA1, "Series1");
                 }
                 else if (tb.Name.Equals("textBoxY"))
                 {
                     tb.Text = treeView1.SelectedNode.Text;
-                    sn2 = treeView1.SelectedNode.Tag as SpecialNumbers;
-                    DrawSpecialNumOnGraph(sn2, "Series2");
+
+
+                    //globalCA2 = treeView1.SelectedNode.Tag as SpecialNumbers;
+                    globalCA2 = objToCoArith(treeView1.SelectedNode.Tag);
+                    DrawSpecialNumOnGraph(globalCA2, "Series2");
                 }
                 //break;
             }//node
-            else
+            //else
             {
                 return;
                 MessageBox.Show("!!!!!!!!");//?????????????????????????????????
@@ -454,6 +460,13 @@ namespace peCourseWork
         #endregion
         //--------------------------------------------------------------------------foo
         #region Foo
+        private CoArith objToCoArith(object o)
+        {
+            if (o is CoArith) return o as CoArith;
+            else if (o is CoTrigonometric) return (o as CoTrigonometric).convertToArith();
+            else if (o is Fraction) return new CoArith(((Fraction)o).num, 0);
+            else return null;
+        }
         private void DrawSpecialNumOnGraph(SpecialNumbers sn, string seriesName)
         {
             Chart c = null;
@@ -495,8 +508,24 @@ namespace peCourseWork
         }//m
         private void buttonDrawClic(object sender, EventArgs e)
         {
-            textBoxDebug.Text = "bDrawClick";
-        }
+            textBoxDebug.Text = "bDrawClick";//d
+            if(globalCA1 != null && globalCA2 != null)
+            {
+                Control[] c = Controls.Find("comboBoxF1", true);
+                if(c.Length != 0)
+                {
+                    //string[] operation = { "+", "-", "x", "/" };
+                    ComboBox cb = c[0] as ComboBox;
+                    switch (cb.SelectedItem)
+                    {
+                        case "+": DrawSpecialNumOnGraph(globalCA1 + globalCA2, "Series3"); break;
+                        case "-": DrawSpecialNumOnGraph(globalCA1 - globalCA2, "Series3"); break;
+                        case "x": DrawSpecialNumOnGraph(globalCA1 * globalCA2, "Series3"); break;
+                        case "/": DrawSpecialNumOnGraph(globalCA1 / globalCA2, "Series3"); break;
+                    }
+                }
+            }
+        }//m
         private void DrawTextBoxComboBox()
         {
             //-------TextBox
@@ -529,6 +558,7 @@ namespace peCourseWork
             comboBox.Size = new Size(40, 50);
             comboBox.Items.AddRange(operation);
             comboBox.Font = new System.Drawing.Font("", 11);//"Times New Roman"
+            comboBox.Name = "comboBoxF1";
             this.Controls.Add(comboBox);
 
             //-------Button
