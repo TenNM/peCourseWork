@@ -408,7 +408,7 @@ namespace peCourseWork
                 {
                     //tb.Text = treeView1.SelectedNode.Text;
                     //tb.Text = e.Data.GetData;
-
+                    //BAD2222222222222222222222222
                     //globalCA1 = treeView1.SelectedNode.Tag as SpecialNumbers;
                     globalCA1 = objToCoArith(treeView1.SelectedNode.Tag);
                     DrawSpecialNumOnGraph(globalCA1, "Series1");
