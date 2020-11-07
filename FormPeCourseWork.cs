@@ -700,16 +700,14 @@ namespace peCourseWork
 
             foreach (object o in Controls)
             {
-                /*if (v.GetType() == typeof(Chart))
-                {
-                    Chart c = v as Chart;
-                    c.Dispose();
-                }*/
                 switch (o)
                 {
                     case Chart c: c.Dispose(); break;
                     case ChartArea ca: ca.Dispose(); break;
                     case Series s: s.Dispose(); break;
+                    case Button b: if (b.Name.Equals("Draw") || b.Name.Equals("Clear")) b.Dispose(); break;
+                    case TextBox tb: if (tb.Name.Equals("textBoxX") || tb.Name.Equals("textBoxY")) tb.Dispose(); break;
+                    case ComboBox cb: if (cb.Name.Equals("comboBoxF1Operations")) cb.Dispose(); break;
                 }
             }
         }//delete buttons and other
