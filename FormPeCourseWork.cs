@@ -398,16 +398,20 @@ namespace peCourseWork
         {
             e.Effect = e.AllowedEffect;
         }
-        private void TextBox_DragDrop(object sender, DragEventArgs e)
+        private void TextBox_DragDrop(object sender, DragEventArgs e)//sender textbox
         {
             TextBox tb = sender as TextBox;
+            TreeNode tn = null;
 
-            if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
+            //if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
             {
                 if (tb.Name.Equals("textBoxX"))
                 {
-                    tb.Text = treeView1.SelectedNode.Text;
-                    sn1 = treeView1.SelectedNode.Tag as SpecialNumbers;
+                    string[] arr = e.Data.GetFormats();
+                    tn = e.Data.GetData(arr[1]) as TreeNode;
+
+                    sn1 = tn.Tag as SpecialNumbers;
+                    tb.Text = tn.Text;
                     DrawSpecialNumOnGraph(sn1, "Series1");
                 }
                 else if (tb.Name.Equals("textBoxY"))
@@ -418,7 +422,7 @@ namespace peCourseWork
                 }
                 //break;
             }//node
-            else
+            //else
             {
                 return;
                 MessageBox.Show("!!!!!!!!");//?????????????????????????????????
