@@ -15,6 +15,7 @@ namespace peCourseWork
         const string ERR_CANT_ADD_IN_THIS_NODE = "Can't add in this node";
         const string ERR_CANT_DEL_THIS_NODE = "Can't delete this node";
         const string ERR_CANT_COPY_THIS_NODE = "Can't copy this node";
+        const string ERR_NODE_NOT_IS_NULL_OR_IMMUTABLE = "Node not found or immutable";
 
         const string BUTTON_TEXT_ADD = "Add";
         const string BUTTON_TEXT_DEL = "Delete";
@@ -398,34 +399,33 @@ namespace peCourseWork
         {
             e.Effect = e.AllowedEffect;
         }
-        private void TextBox_DragDrop(object sender, DragEventArgs e)//sender textbox
+        private void TextBox_DragDrop(object sender, DragEventArgs e)//sender textbox !!!!!!!!!
         {
-            TextBox tb = sender as TextBox;
-            TreeNode tn = null;
+            TextBox senderTb = sender as TextBox;
+            TreeNode grabedByMouseNode = null;
 
-            //if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
+            string[] eFormats = e.Data.GetFormats();
+            grabedByMouseNode = e.Data.GetData(eFormats[1]) as TreeNode;
+
+            if (grabedByMouseNode != null && canWeDamageThisNode(grabedByMouseNode.Text))
             {
-                if (tb.Name.Equals("textBoxX"))
-                {
-                    string[] arr = e.Data.GetFormats();
-                    tn = e.Data.GetData(arr[1]) as TreeNode;
-
-                    sn1 = tn.Tag as SpecialNumbers;
-                    tb.Text = tn.Text;
+                if (senderTb.Name.Equals("textBoxX"))
+                {                   
+                    sn1 = grabedByMouseNode.Tag as SpecialNumbers;
+                    senderTb.Text = grabedByMouseNode.Text;
                     DrawSpecialNumOnGraph(sn1, "Series1");
                 }
-                else if (tb.Name.Equals("textBoxY"))
+                else if (senderTb.Name.Equals("textBoxY"))
                 {
-                    tb.Text = treeView1.SelectedNode.Text;
-                    sn2 = treeView1.SelectedNode.Tag as SpecialNumbers;
+                    sn2 = grabedByMouseNode.Tag as SpecialNumbers;
+                    senderTb.Text = grabedByMouseNode.Text;
                     DrawSpecialNumOnGraph(sn2, "Series2");
                 }
-                //break;
             }//node
-            //else
+            else
             {
+                textBoxDebug.Text = ERR_NODE_NOT_IS_NULL_OR_IMMUTABLE;
                 return;
-                MessageBox.Show("!!!!!!!!");//?????????????????????????????????
             }
                 
             
