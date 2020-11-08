@@ -439,6 +439,7 @@ namespace peCourseWork
         {
             TextBox senderTb = sender as TextBox;
             TreeNode grabedByMouseNode = null;
+            Chart findeCr = FindControl("DrawChart") as Chart;
 
             string[] eFormats = e.Data.GetFormats();
             grabedByMouseNode = e.Data.GetData(eFormats[1]) as TreeNode;
@@ -450,12 +451,14 @@ namespace peCourseWork
                     sn1 = grabedByMouseNode.Tag as SpecialNumbers;
                     senderTb.Text = grabedByMouseNode.Text;
                     DrawSpecialNumOnGraph(sn1, "Series1");
+                    findeCr.Series[2].Points.Clear();
                 }
                 else if (senderTb.Name.Equals("textBoxY"))
                 {
                     sn2 = grabedByMouseNode.Tag as SpecialNumbers;
                     senderTb.Text = grabedByMouseNode.Text;
                     DrawSpecialNumOnGraph(sn2, "Series2");
+                    findeCr.Series[2].Points.Clear();
                 }
             }//node
             else
@@ -623,6 +626,7 @@ namespace peCourseWork
             comboBox.Location = new Point(146, 245);
             comboBox.Size = new Size(40, 50);
             comboBox.Items.AddRange(operation);
+            comboBox.SelectedIndex = 0;
             comboBox.Font = new System.Drawing.Font("", 11);//"Times New Roman"
             comboBox.Name = "comboBoxF1Operations";
             this.Controls.Add(comboBox);
