@@ -428,6 +428,8 @@ namespace peCourseWork
                 grabedByMouseNode.Tag = null;
                 grabedByMouseNode.Remove();
             }
+            else MessageBox.Show(ERR_CANT_DEL_THIS_NODE);
+            buttons1stFoo();
         }
         //-----
         private void buttonAdd_DragEnter(object sender, DragEventArgs e)
@@ -451,6 +453,7 @@ namespace peCourseWork
                     //if (clonedNode != null) clonedNode.Parent.Nodes.Add(clonedNode);
                     if (clonedNode != null) grabedByMouseNode.Parent.Nodes.Add(clonedNode);
                 }
+                else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
             }
             //else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
             buttons1stFoo();
