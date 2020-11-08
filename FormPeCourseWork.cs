@@ -464,6 +464,7 @@ namespace peCourseWork
         {
             TextBox senderTb = sender as TextBox;
             TreeNode grabedByMouseNode = null;
+            Chart findeCr = FindControl("DrawChart") as Chart;
 
             string[] eFormats = e.Data.GetFormats();
             grabedByMouseNode = e.Data.GetData(eFormats[1]) as TreeNode;
@@ -475,12 +476,14 @@ namespace peCourseWork
                     sn1 = grabedByMouseNode.Tag as SpecialNumbers;
                     senderTb.Text = grabedByMouseNode.Text;
                     DrawSpecialNumOnGraph(sn1, "Series1");
+                    findeCr.Series[2].Points.Clear();
                 }
                 else if (senderTb.Name.Equals("textBoxY"))
                 {
                     sn2 = grabedByMouseNode.Tag as SpecialNumbers;
                     senderTb.Text = grabedByMouseNode.Text;
                     DrawSpecialNumOnGraph(sn2, "Series2");
+                    findeCr.Series[2].Points.Clear();
                 }
             }//node
             else
@@ -655,6 +658,7 @@ namespace peCourseWork
             comboBox.Location = new Point(146, 245);
             comboBox.Size = new Size(40, 50);
             comboBox.Items.AddRange(operation);
+            comboBox.SelectedIndex = 0;
             comboBox.Font = new System.Drawing.Font("", 11);//"Times New Roman"
             comboBox.Name = "comboBoxF1Operations";
             this.Controls.Add(comboBox);
@@ -663,6 +667,7 @@ namespace peCourseWork
             Button buttonDraw = new Button();
             buttonDraw.Location = new Point(346, 245);
             buttonDraw.Size = new Size(80, 20);
+            buttonDraw.Name = "buttonDraw";
             buttonDraw.Text = "Draw";
             buttonDraw.Click += buttonDrawClick;
             this.Controls.Add(buttonDraw);
@@ -670,9 +675,25 @@ namespace peCourseWork
             Button buttonClear = new Button();
             buttonClear.Location = new Point(385, 580);
             buttonClear.Size = new Size(50, 50);
+            buttonClear.Name = "buttonClear";
             buttonClear.Text = "Clear";
             buttonClear.Click += buttonDrawClear;
             this.Controls.Add(buttonClear);
+
+            // Set up the delays for the ToolTip.
+            toolTip.AutoPopDelay = 2000;
+            toolTip.InitialDelay = 500;
+            toolTip.ReshowDelay = 400;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip.Active = Properties.Settings.Default.ShowPrompts;//??????????????
+
+            // Set up the ToolTip text for the Button and Checkbox.
+            toolTip.SetToolTip(textBoxX, "field X for adding a tree element with further rendering");
+            toolTip.SetToolTip(textBoxY, "field Y for adding a tree element with further rendering");
+            toolTip.SetToolTip(comboBox, "choice of operation between two expressions");
+            toolTip.SetToolTip(buttonDraw, "the button is designed to add the resulting number");
+            toolTip.SetToolTip(buttonClear, "button to clear chart contents");
+           
         }
         private void DrawChart()
         {
@@ -681,7 +702,7 @@ namespace peCourseWork
             chart.Location = new Point(16, 280);// 16 220 
             chart.Size = new Size(350, 350);
             chart.MouseWheel += chart1_MouseWheel;
-            toolTip.SetToolTip(chart, "Test");
+            toolTip.SetToolTip(chart, "А graph for drawing numbers and their interactions");
             //
             ChartArea chartArea = new ChartArea("ChartArea1");
             chart.ChartAreas.Add(chartArea);
