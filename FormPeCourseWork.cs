@@ -147,6 +147,14 @@ namespace peCourseWork
                         labelField2.Text = "den";
                     }
                     break;
+
+                case NUMBERS:
+                case COMPLEX:
+                    {
+                        labelField1.Text = "?";
+                        labelField2.Text = "?";
+                    }
+                    break;
             }//switch text
 
             if (e.Node.Tag != null)//debug
