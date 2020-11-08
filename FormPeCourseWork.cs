@@ -256,20 +256,23 @@ namespace peCourseWork
                         case ARITHMETIC:
                             {
                                 CoArith ca = new CoArith(resArray[0], resArray[1]);
-                                treeNode.Nodes[0].Nodes[0].Nodes.Add(ca.ToString());
+                                //treeNode.Nodes[0].Nodes[0].Nodes.Add(ca.ToString());
+                                treeNode.Nodes[0].Nodes[0].Nodes.Add(ca.ToStringLowPrecision(Properties.Settings.Default.EPSGUI));
                                 treeNode.Nodes[0].Nodes[0].LastNode.Tag = ca;
                             }
                             break;
                         case TRIGINOMETRIC:
                             {
                                 CoTrigonometric ct = new CoTrigonometric(resArray[0], resArray[1]);
-                                treeNode.Nodes[0].Nodes[1].Nodes.Add(ct.ToString());//add only label, no link
+                                //treeNode.Nodes[0].Nodes[1].Nodes.Add(ct.ToString());//add only label, no link
+                                treeNode.Nodes[0].Nodes[1].Nodes.Add(ct.ToStringLowPrecision(Properties.Settings.Default.EPSGUI));
                                 treeNode.Nodes[0].Nodes[1].LastNode.Tag = ct;//add link
                             }
                             break;
                         case DEVISION:
                             {
                                 Fraction fr = new Fraction((int)resArray[0], (int)resArray[1]);
+                                //treeNode.Nodes[1].Nodes.Add(fr.ToString());
                                 treeNode.Nodes[1].Nodes.Add(fr.ToString());
                                 treeNode.Nodes[1].LastNode.Tag = fr;
                             }
@@ -368,7 +371,8 @@ namespace peCourseWork
                     myStream.Close();
                 }
             }
-        }
+            redrawTreeViewNumPrecision();
+        }//m
         private void saveNoDialog()
         {
             //FileIOSerializer.saveMk2(treeNode, FILE_IO_PATH);
@@ -385,7 +389,8 @@ namespace peCourseWork
                 treeView1.Nodes.Add(treeNode);
                 treeView1.ExpandAll();
             }
-        }
+            redrawTreeViewNumPrecision();
+        }//m
         #endregion
         //---------------------------------------------------------------------------------Buttons
         #region Buttons
