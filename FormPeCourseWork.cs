@@ -418,7 +418,17 @@ namespace peCourseWork
             e.Effect = e.AllowedEffect;
             buttons2ndFoo();
         }
-        private void buttonDelete_DragDrop(object sender, DragEventArgs e){ delFrTreeNode(); }
+        private void buttonDelete_DragDrop(object sender, DragEventArgs e){
+            //delFrTreeNode();
+            TreeNode grabedByMouseNode = null;
+            string[] eFormats = e.Data.GetFormats();
+            grabedByMouseNode = e.Data.GetData(eFormats[1]) as TreeNode;
+            if (grabedByMouseNode != null && canWeDamageThisNode(grabedByMouseNode.Text))
+            {
+                grabedByMouseNode.Tag = null;
+                grabedByMouseNode.Remove();
+            }
+        }
         //-----
         private void buttonAdd_DragEnter(object sender, DragEventArgs e)
         {
