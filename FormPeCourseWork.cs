@@ -104,6 +104,8 @@ namespace peCourseWork
                     {
                         textBoxField1.Text = ct.abs.ToString();//!!!!!!!!!!
                         textBoxField2.Text = ct.fi.ToString();
+                        labelField1.Text = "abs";
+                        labelField2.Text = "fi";
                     }
                     break;
 
@@ -111,6 +113,8 @@ namespace peCourseWork
                     {
                         textBoxField1.Text = ct.re.ToString();//!!!!!!!!!!
                         textBoxField2.Text = ct.im.ToString();
+                        labelField1.Text = "re";
+                        labelField2.Text = "im";
                     }
                     break;
 
@@ -118,9 +122,32 @@ namespace peCourseWork
                     {
                         textBoxField1.Text = ct.num.ToString();//!!!!!!!!!!
                         textBoxField2.Text = ct.den.ToString();
+                        labelField1.Text = "num";
+                        labelField2.Text = "den";
                     }
                     break;
             }
+
+            switch (e.Node.Text)
+            {
+                case ARITHMETIC:
+                    {
+                        labelField1.Text = "re";
+                        labelField2.Text = "im";
+                    } break;
+                case TRIGINOMETRIC:
+                    {
+                        labelField1.Text = "abs";
+                        labelField2.Text = "fi";
+                    }
+                    break;
+                case DEVISION:
+                    {
+                        labelField1.Text = "num";
+                        labelField2.Text = "den";
+                    }
+                    break;
+            }//switch text
 
             if (e.Node.Tag != null)//debug
             {
@@ -258,7 +285,7 @@ namespace peCourseWork
             textBoxDebug.Text = o.ToString();//debug
         }
         #endregion
-        //---------------------------------------------------------save/load !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        //---------------------------------------------------------save/load !!!!!!!!!!!!!! old file IO class ver
         #region file IO
         private void saveDialogShow()
         {
