@@ -425,14 +425,24 @@ namespace peCourseWork
             e.Effect = e.AllowedEffect;
             buttons2ndFoo();
         }
-        private void buttonAdd_DragDrop(object sender, DragEventArgs e)
+        private void buttonAdd_DragDrop(object sender, DragEventArgs e)//sender is button
         {
-            if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
+            //if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
             {
-                TreeNode clonedNode = (TreeNode)treeView1.SelectedNode.Clone();
-                treeView1.SelectedNode.Parent.Nodes.Add(clonedNode);
+                //TreeNode clonedNode = (TreeNode)treeView1.SelectedNode.Clone();
+                //treeView1.SelectedNode.Parent.Nodes.Add(clonedNode);
+                TreeNode grabedByMouseNode = null;
+                string[] eFormats = e.Data.GetFormats();
+                grabedByMouseNode = e.Data.GetData(eFormats[1]) as TreeNode;
+
+                if (grabedByMouseNode != null && canWeDamageThisNode(grabedByMouseNode.Text))
+                {
+                    TreeNode clonedNode = grabedByMouseNode.Clone() as TreeNode;
+                    //if (clonedNode != null) clonedNode.Parent.Nodes.Add(clonedNode);
+                    if (clonedNode != null) grabedByMouseNode.Parent.Nodes.Add(clonedNode);
+                }
             }
-            else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
+            //else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
             buttons1stFoo();
         }
         //---
@@ -567,18 +577,25 @@ namespace peCourseWork
                 ComboBox findedCb = FindControl("comboBoxF1Operations") as ComboBox;
                 if(findedCb != null)
                 {
-                    switch (findedCb.SelectedItem)
+                    try
                     {
-                        case "+": snRes = SpecialNumToCoArith(sn1) + SpecialNumToCoArith(sn2); break;
-                        case "-": snRes = SpecialNumToCoArith(sn1) - SpecialNumToCoArith(sn2); break;
-                        case "x": snRes = SpecialNumToCoArith(sn1) * SpecialNumToCoArith(sn2); break;
-                        case "/": snRes = SpecialNumToCoArith(sn1) / SpecialNumToCoArith(sn2); break;
-                        default: return;
-                    }                  
-                    DrawSpecialNumOnGraph(snRes, "Series3");
+                        switch (findedCb.SelectedItem)
+                        {
+                            case "+": snRes = SpecialNumToCoArith(sn1) + SpecialNumToCoArith(sn2); break;
+                            case "-": snRes = SpecialNumToCoArith(sn1) - SpecialNumToCoArith(sn2); break;
+                            case "x": snRes = SpecialNumToCoArith(sn1) * SpecialNumToCoArith(sn2); break;
+                            case "/": snRes = SpecialNumToCoArith(sn1) / SpecialNumToCoArith(sn2); break;
+                            default: return;
+                        }
+                        DrawSpecialNumOnGraph(snRes, "Series3");
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }              
             }
-        }
+        }//m
 
         private void buttonDrawClear(object sender, EventArgs e)
         {
