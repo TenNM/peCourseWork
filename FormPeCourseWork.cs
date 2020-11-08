@@ -406,6 +406,11 @@ namespace peCourseWork
             //treeView1.DoDragDrop(e.Item, DragDropEffects.Move);
             var ret = DoDragDrop(e.Item, DragDropEffects.Move);
             if (DragDropEffects.None == ret) { buttons1stFoo(); }
+            else if(DragDropEffects.Move == ret)
+            {
+                TreeView senderTv = sender as TreeView;
+                if(senderTv != null) senderTv.SelectedNode = e.Item as TreeNode;
+            }
         }
         //-----
         private void buttonDelete_DragEnter(object sender, DragEventArgs e)
