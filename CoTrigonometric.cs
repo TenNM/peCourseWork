@@ -38,6 +38,13 @@ namespace peCourseWork
         {
             return (string.Format("{0}*(cos({1})+isin({1}))", abs, fi));
         }
+        internal override string ToStringLowPrecision(byte pres)
+        {
+            double newAbs = Service.roundAdvanced(abs, pres);
+            double newFi = Service.roundAdvanced(fi, pres);
+
+            return (string.Format("{0}*(cos({1})+isin({1}))", newAbs, newFi));
+        }
         internal bool equals(CoTrigonometric second)
         {
             return ( (Math.Abs(this.abs - second.abs)<EPS) && (Math.Abs(this.fi - second.fi)<EPS) );

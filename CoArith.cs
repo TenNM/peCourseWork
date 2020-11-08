@@ -37,6 +37,13 @@ namespace peCourseWork
         {
             return (String.Format( "{0} {1} {2}i", re, signStr(im), Math.Abs(im) ));
         }
+        internal override string ToStringLowPrecision(byte pres)
+        {
+            double newRe = Service.roundAdvanced(re, pres);
+            double newIm = Service.roundAdvanced(im, pres);
+
+            return (String.Format("{0} {1} {2}i", newRe, signStr(newIm), Math.Abs(newIm)));
+        }
         //---------------------------------------------------------------------------------convert
         internal override CoArith convertToArith()
         {

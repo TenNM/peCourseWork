@@ -7,5 +7,6 @@ namespace peCourseWork
     {
         internal abstract CoArith convertToArith();
         internal abstract CoTrigonometric convertToTrigonometric();
+        internal abstract string ToStringLowPrecision(byte pres);
     }
 }

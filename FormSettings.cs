@@ -52,7 +52,7 @@ namespace peCourseWork
             Properties.Settings.Default.EPSGUI = (byte)trackBarPrecision.Value;
 
             textBox1.Text = Properties.Settings.Default.EPSGUI.ToString();//debug
-            labelPrecision.Text = Properties.Settings.Default.EPSGUI.ToString(); 
+            labelPrecision.Text = Properties.Settings.Default.EPSGUI.ToString();
         }
 
         private void buttonFormSetOk_Click(object sender, EventArgs e)
@@ -60,6 +60,8 @@ namespace peCourseWork
             Properties.Settings.Default.Save();
             toolTip1.Active = Properties.Settings.Default.ShowPrompts;
             (this.Owner as FormPeCourseWork).toolTip.Active = Properties.Settings.Default.ShowPrompts;
+
+            (this.Owner as FormPeCourseWork).redrawTreeViewNumPrecision();//new
 
             this.Dispose();
             //this.Close();

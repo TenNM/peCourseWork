@@ -1,4 +1,6 @@
-﻿using System;
+﻿using sandboxCS;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -37,6 +39,7 @@ namespace peCourseWork
         // Create the ToolTip and associate with the Form container
         internal ToolTip toolTip = new ToolTip();
         TreeNode treeNode = new TreeNode(NUMBERS);
+        List<TreeNode> nodeList = new List<TreeNode>();
         SpecialNumbers sn1;
         SpecialNumbers sn2;
         public FormPeCourseWork()
@@ -95,6 +98,15 @@ namespace peCourseWork
         }
         #endregion
         #region treeView
+        void FillListNodes(TreeNode node)
+        {
+            foreach (TreeNode subnode in node.Nodes)
+            {
+                FillListNodes(subnode);
+            }
+            // Print out node
+            nodeList.Add(node);
+        }
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)//if u select node
         {
             object o = e.Node.Tag;
@@ -163,7 +175,6 @@ namespace peCourseWork
             }
             else textBoxDebug.Text = "null";
         }
-
         private bool canWeAddInThisNode(string nodeText)//add
         {
             switch (nodeText)
@@ -185,6 +196,23 @@ namespace peCourseWork
                 default: return true;
             }
         }
+        internal void redrawTreeViewNumPrecision()
+        {
+            byte presNow = Properties.Settings.Default.EPSGUI;
+            FillListNodes(treeView1.Nodes[0]);
+
+            foreach(TreeNode nodeIter in nodeList)
+            {
+                if (canWeDamageThisNode(nodeIter.Text))
+                {
+                    switch (nodeIter.Tag)
+                    {
+                        case CoArith ca: nodeIter.Text = ca.ToStringLowPrecision(presNow); break;
+                        case CoTrigonometric ct: nodeIter.Text = ct.ToStringLowPrecision(presNow); break;
+                    }
+                }
+            }
+        }//m
         #endregion
         //-----------------------------------------------------------------------------process
         #region process
@@ -309,7 +337,8 @@ namespace peCourseWork
                 if ((myStream = saveFileDialog1.OpenFile()) != null)
                 {
                     // Code to write the stream goes here.
-                    FileIOSerializer.saveMk2(treeNode, myStream);
+                    //FileIOSerializer.saveMk2(treeNode, myStream);
+                    FileIOSerializer.save(treeNode, myStream);
                     myStream.Close();
                 }
             }
@@ -323,7 +352,7 @@ namespace peCourseWork
             openFileDialog1.Filter = "bin files (*.bin)|*.bin";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.InitialDirectory = "C:\\Users\\tenmv\\source\\repos\\pe7\\bin\\Debug";
+            //openFileDialog1.InitialDirectory = "C:\\Users\\tenmv\\source\\repos\\pe7\\bin\\Debug";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK) //{ return; }
             {
@@ -331,7 +360,8 @@ namespace peCourseWork
                 if ((myStream = openFileDialog1.OpenFile()) != null)
                 {
                     // Code to write the stream goes here.
-                    FileIOSerializer.loadMk2(ref treeNode, myStream);
+                    //FileIOSerializer.loadMk2(ref treeNode, myStream);
+                    FileIOSerializer.load(ref treeNode, myStream);
                     treeView1.Nodes.Clear();//
                     treeView1.Nodes.Add(treeNode);//
                     treeView1.ExpandAll();//
@@ -341,14 +371,16 @@ namespace peCourseWork
         }
         private void saveNoDialog()
         {
-            FileIOSerializer.saveMk2(treeNode, FILE_IO_PATH);
+            //FileIOSerializer.saveMk2(treeNode, FILE_IO_PATH);
+            FileIOSerializer.save(treeNode, FILE_IO_PATH);
         }
         private void openNoDialog()
         {
             DialogResult result = MessageBox.Show(REALLY_LOAD_TREE_NODE, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                FileIOSerializer.loadMk2(ref treeNode, FILE_IO_PATH);
+                //FileIOSerializer.loadMk2(ref treeNode, FILE_IO_PATH);
+                FileIOSerializer.load(ref treeNode, FILE_IO_PATH);
                 treeView1.Nodes.Clear();
                 treeView1.Nodes.Add(treeNode);
                 treeView1.ExpandAll();

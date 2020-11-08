@@ -1,52 +1,47 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace peCourseWork
+namespace sandboxCS
 {
     internal abstract class FileIOSerializer
-    {    
-        //------------------------------------------------------------serialization, save, load
-        internal static void saveMk2(object saveableObj, string path)
-        {                   
+    {
+        internal const string SAVE_ERR = "Save error";
+        internal const string LOAD_ERR = "Load error";
+        //------------------------------------------------binary serialization, save, load
+        internal static void save(object saveableObj, string path)
+        {
             var binFormatter = new BinaryFormatter();
             using (var fStream = new FileStream(path, FileMode.Create))
             {
                 binFormatter.Serialize(fStream, saveableObj);
-                //return true;
             }
-            //return false;
         }
-        internal static void saveMk2(object saveableObj, Stream fs)
+        internal static void save(object saveableObj, Stream fs)
         {
             var binFormatter = new BinaryFormatter();
-            //using (var fStream = new FileStream(path, FileMode.Create))
+            try
             {
                 binFormatter.Serialize(fs, saveableObj);
-                //return true;
             }
-            //return false;
+            catch { throw new System.Exception(SAVE_ERR); }
         }
-        //-----
-        internal static void loadMk2<T>(ref T loadableObj, string path)
+        //--------------------------------------------------------------------------
+        internal static void load<T>(ref T loadableObj, string path) where T : class
         {
-
             var binFormatter = new BinaryFormatter();
             using (var fStream = new FileStream(path, FileMode.Open))
             {
-                loadableObj = (T)binFormatter.Deserialize(fStream);
-               //loadableObj = binFormatter.Deserialize(fStream) as T;
+                loadableObj = binFormatter.Deserialize(fStream) as T;
             }
         }
-        internal static void loadMk2<T>(ref T loadableObj, Stream fs)
+        internal static void load<T>(ref T loadableObj, Stream fs) where T : class
         {
-
             var binFormatter = new BinaryFormatter();
-            //using (var fStream = new FileStream(path, FileMode.Open))
+            try
             {
-                loadableObj = (T)binFormatter.Deserialize(fs);
-                //loadableObj = binFormatter.Deserialize(fStream) as T;
+                loadableObj = binFormatter.Deserialize(fs) as T;
             }
+            catch { throw new System.Exception(LOAD_ERR); }
         }
         //---------------------------------------------------------------------------
     }
