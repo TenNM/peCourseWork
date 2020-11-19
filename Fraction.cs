@@ -53,7 +53,7 @@ namespace peCourseWork
         }
         internal double fractionToDouble()
         {
-            if (den != 0) return num / den;
+            if (den != 0) return (double)num / (double)den;
             else throw new Exception(ERR_DIVISION_BY_ZERO);
         }
         //-----------------------------------------------------------------------------unary static

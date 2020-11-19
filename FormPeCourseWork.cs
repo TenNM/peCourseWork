@@ -54,8 +54,8 @@ namespace peCourseWork
 
             initializationTip();
 
-            f1();//d
-            openNoDialog();//d
+            //f1();//d
+            //openNoDialog();//d
         }
 
         protected void DrawTreeNodeFrame()
