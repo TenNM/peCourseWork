@@ -44,7 +44,6 @@ namespace peCourseWork
             else checkBoxPrompt.Text = "now off";
 
             textBox1.Text = Properties.Settings.Default.ShowPrompts.ToString();//debug
-            //labelPrecision.Text = Properties.Settings.Default.ShowPrompts.ToString();
         }
 
         private void trackBarPrecision_Scroll(object sender, EventArgs e)
@@ -63,14 +62,12 @@ namespace peCourseWork
 
             (this.Owner as FormPeCourseWork).redrawTreeViewNumPrecision();//new
 
-            this.Dispose();
-            //this.Close();
+            this.Close();
         }
 
         private void buttonFormSetCancel_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-            //this.Close();
+            this.Close();
         }
         #endregion
         //--------------------------------------------------------------------------end

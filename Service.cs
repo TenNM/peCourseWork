@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 
 namespace peCourseWork
 {
@@ -38,7 +36,7 @@ namespace peCourseWork
         }
         public static double roundAdvanced(double d, int accuracy)
         {
-            accuracy = (int)Math.Pow(10, accuracy); //10^accuracy;
+            accuracy = (int)Math.Pow(10, accuracy);
             d = d * accuracy;
             int i = (int)Math.Round(d);
             return (double)i / accuracy;

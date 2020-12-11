@@ -11,7 +11,6 @@ namespace peCourseWork
         internal CoTrigonometric()
         {
             this.abs = 1;
-            //this.fi = Math.PI/4;
             this.fi = SpecialNumbers.PI_4;
         }
         internal CoTrigonometric(double abs, double fi)

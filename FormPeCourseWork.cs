@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -36,7 +35,6 @@ namespace peCourseWork
 
         #endregion
         #region inits
-        // Create the ToolTip and associate with the Form container
         internal ToolTip toolTip = new ToolTip();
         TreeNode treeNode = new TreeNode(NUMBERS);
         List<TreeNode> nodeList = new List<TreeNode>();
@@ -53,9 +51,6 @@ namespace peCourseWork
             this.KeyPreview = true;
 
             initializationTip();
-
-            //f1();//d
-            //openNoDialog();//d
         }
 
         protected void DrawTreeNodeFrame()
@@ -92,9 +87,6 @@ namespace peCourseWork
             toolTip.SetToolTip(this.textBoxDebug, "Debug field");
             toolTip.SetToolTip(this.treeView1, "Displays class hierarchy");
             toolTip.SetToolTip(this.menuStrip1, "Toolbar, has a wide range of tools");
-
-            //toolTip1.SetToolTip(this.menuStrip1.fileToolStripMenuItem, "Fail");
-
         }
         #endregion
         #region treeView
@@ -339,8 +331,6 @@ namespace peCourseWork
             {
                 if ((myStream = saveFileDialog1.OpenFile()) != null)
                 {
-                    // Code to write the stream goes here.
-                    //FileIOSerializer.saveMk2(treeNode, myStream);
                     FileIOSerializer.save(treeNode, myStream);
                     myStream.Close();
                 }
@@ -349,21 +339,16 @@ namespace peCourseWork
         private void openDialogShow()
         {
             Stream myStream;
-            //FileStream myStream;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.Filter = "bin files (*.bin)|*.bin";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = "C:\\Users\\tenmv\\source\\repos\\pe7\\bin\\Debug";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK) //{ return; }
             {
-                //string filePath = openFileDialog1.FileName;
                 if ((myStream = openFileDialog1.OpenFile()) != null)
                 {
-                    // Code to write the stream goes here.
-                    //FileIOSerializer.loadMk2(ref treeNode, myStream);
                     FileIOSerializer.load(ref treeNode, myStream);
                     treeView1.Nodes.Clear();//
                     treeView1.Nodes.Add(treeNode);//
@@ -375,7 +360,6 @@ namespace peCourseWork
         }//m
         private void saveNoDialog()
         {
-            //FileIOSerializer.saveMk2(treeNode, FILE_IO_PATH);
             FileIOSerializer.save(treeNode, FILE_IO_PATH);
         }
         private void openNoDialog()
@@ -383,7 +367,6 @@ namespace peCourseWork
             DialogResult result = MessageBox.Show(REALLY_LOAD_TREE_NODE, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                //FileIOSerializer.loadMk2(ref treeNode, FILE_IO_PATH);
                 FileIOSerializer.load(ref treeNode, FILE_IO_PATH);
                 treeView1.Nodes.Clear();
                 treeView1.Nodes.Add(treeNode);
@@ -396,7 +379,7 @@ namespace peCourseWork
         #region Buttons
         private void buttonAdd_Click(object sender, EventArgs e){ addInTreeNodeMk2(); }
         private void buttonDelete_Click(object sender, EventArgs e){ delFrTreeNode(); }
-        private void buttonChange_Click(object sender, EventArgs e){ changeTreeNode(); }//!!!!!!
+        private void buttonChange_Click(object sender, EventArgs e){ changeTreeNode(); }
         #endregion
         //---------------------------------------------------------------------------------Menu
         #region Menu
@@ -440,7 +423,6 @@ namespace peCourseWork
         //-----
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            //treeView1.DoDragDrop(e.Item, DragDropEffects.Move);
             var ret = DoDragDrop(e.Item, DragDropEffects.Move);
             if (DragDropEffects.None == ret) { buttons1stFoo(); }
             else if(DragDropEffects.Move == ret)
@@ -456,7 +438,6 @@ namespace peCourseWork
             buttons2ndFoo();
         }
         private void buttonDelete_DragDrop(object sender, DragEventArgs e){
-            //delFrTreeNode();
             TreeNode grabedByMouseNode = null;
             string[] eFormats = e.Data.GetFormats();
             grabedByMouseNode = e.Data.GetData(eFormats[1]) as TreeNode;
@@ -474,25 +455,19 @@ namespace peCourseWork
             e.Effect = e.AllowedEffect;
             buttons2ndFoo();
         }
-        private void buttonAdd_DragDrop(object sender, DragEventArgs e)//sender is button
-        {
-            //if (treeView1.SelectedNode != null && canWeDamageThisNode(treeView1.SelectedNode.Text))
-            {
-                //TreeNode clonedNode = (TreeNode)treeView1.SelectedNode.Clone();
-                //treeView1.SelectedNode.Parent.Nodes.Add(clonedNode);
-                TreeNode grabedByMouseNode = null;
-                string[] eFormats = e.Data.GetFormats();
-                grabedByMouseNode = e.Data.GetData(eFormats[1]) as TreeNode;
+        private void buttonAdd_DragDrop(object sender, DragEventArgs e)
+        {       
+            TreeNode grabedByMouseNode = null;
+            string[] eFormats = e.Data.GetFormats();
+            grabedByMouseNode = e.Data.GetData(eFormats[1]) as TreeNode;
 
-                if (grabedByMouseNode != null && canWeDamageThisNode(grabedByMouseNode.Text))
-                {
-                    TreeNode clonedNode = grabedByMouseNode.Clone() as TreeNode;
-                    //if (clonedNode != null) clonedNode.Parent.Nodes.Add(clonedNode);
-                    if (clonedNode != null) grabedByMouseNode.Parent.Nodes.Add(clonedNode);
-                }
-                else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
+            if (grabedByMouseNode != null && canWeDamageThisNode(grabedByMouseNode.Text))
+            {
+                TreeNode clonedNode = grabedByMouseNode.Clone() as TreeNode;
+                if (clonedNode != null) grabedByMouseNode.Parent.Nodes.Add(clonedNode);
             }
-            //else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
+            else MessageBox.Show(ERR_CANT_COPY_THIS_NODE);
+            
             buttons1stFoo();
         }
         //---
@@ -539,9 +514,8 @@ namespace peCourseWork
         #region hot keys
         private void FormPeCourseWork_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)//???????????????????
+            if (e.KeyCode == Keys.Escape)
             {
-                //e.Modifiers == Keys.Escape
                 if (e.Modifiers == Keys.Escape)
                     Application.Exit();
                 else AskSave();
@@ -556,8 +530,6 @@ namespace peCourseWork
             else if (e.Control && e.KeyCode == Keys.Oemplus) { addInTreeNodeMk2(); }
             else if (e.Control && e.KeyCode == Keys.Delete) { delFrTreeNode(); }
             else if (e.Control && e.KeyCode == Keys.Tab) { changeTreeNode(); }
-
-            //else if(e.KeyCode == Keys.Right) { textBoxDebug.Text = "r"; }
         }
         #endregion
         //--------------------------------------------------------------------------foo
@@ -604,8 +576,8 @@ namespace peCourseWork
                 }
                 if(s != null)
                 {
-                    s.Points.Clear();//!!!!!!!!!!!!!!!!1
-                    s.Points.AddXY(0, 0);//!!!!!!!!!!!!!!!!!!!!
+                    s.Points.Clear();
+                    s.Points.AddXY(0, 0);
                     switch (sn)
                     {
                         case Fraction f: s.Points.AddXY(f.fractionToDouble(), 0); break;
@@ -617,7 +589,6 @@ namespace peCourseWork
                             } break;
                     }
                 }
-                //series1.Points.AddXY(0, 0);
             }
         }//m
         private void buttonDrawClick(object sender, EventArgs e)
@@ -746,13 +717,9 @@ namespace peCourseWork
             //
             ChartArea chartArea = new ChartArea("ChartArea1");
             chart.ChartAreas.Add(chartArea);
-            //chartArea.AxisX.Title = "x";
-            //chartArea.AxisY.Title = "y";
 
             chart.ChartAreas[0].AxisX.Interval = 1;
             chart.ChartAreas[0].AxisY.Interval = 1;
-            //chart.ChartAreas[0].AxisX.ScaleView.Zoom(-5, 5);
-            //chart.ChartAreas[0].AxisY.ScaleView.Zoom(-5, 5);
             chart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
             chart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
 
@@ -784,7 +751,7 @@ namespace peCourseWork
         }
         private void f1()
         {
-            this.Height = 700;//600
+            this.Height = 700;
             this.textBoxDebug.Text = this.Height.ToString();//d
 
             DrawTextBoxComboBox();
