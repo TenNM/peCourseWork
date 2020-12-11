@@ -401,11 +401,11 @@ namespace peCourseWork
         //-----
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            f1Close();
+            complexArithmeticClose();
         }
         private void f1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            f1();
+            complexArithmetic();
         }      
         #endregion
         //------------------------------------------------------------------------DragDrop
@@ -749,7 +749,7 @@ namespace peCourseWork
 
             this.Controls.Add(chart);
         }
-        private void f1()
+        private void complexArithmetic()
         {
             this.Height = 700;
             this.textBoxDebug.Text = this.Height.ToString();//d
@@ -788,7 +788,7 @@ namespace peCourseWork
             }
             catch { }
         }
-        private void f1Close()
+        private void complexArithmeticClose()
         {
             this.Height = 263;//fix
             this.textBoxDebug.Text = this.Height.ToString();//d

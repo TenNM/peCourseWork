@@ -41,9 +41,10 @@
             // 
             // buttonFormSetOk
             // 
-            this.buttonFormSetOk.Location = new System.Drawing.Point(153, 242);
+            this.buttonFormSetOk.Location = new System.Drawing.Point(230, 372);
+            this.buttonFormSetOk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonFormSetOk.Name = "buttonFormSetOk";
-            this.buttonFormSetOk.Size = new System.Drawing.Size(114, 41);
+            this.buttonFormSetOk.Size = new System.Drawing.Size(171, 63);
             this.buttonFormSetOk.TabIndex = 0;
             this.buttonFormSetOk.Text = "OK";
             this.buttonFormSetOk.UseVisualStyleBackColor = true;
@@ -52,18 +53,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 24);
+            this.label1.Location = new System.Drawing.Point(38, 37);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.Size = new System.Drawing.Size(68, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Prompts";
             // 
             // checkBoxPrompt
             // 
             this.checkBoxPrompt.AutoSize = true;
-            this.checkBoxPrompt.Location = new System.Drawing.Point(28, 52);
+            this.checkBoxPrompt.Location = new System.Drawing.Point(42, 80);
+            this.checkBoxPrompt.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBoxPrompt.Name = "checkBoxPrompt";
-            this.checkBoxPrompt.Size = new System.Drawing.Size(107, 17);
+            this.checkBoxPrompt.Size = new System.Drawing.Size(155, 24);
             this.checkBoxPrompt.TabIndex = 2;
             this.checkBoxPrompt.Text = "checkBoxPrompt";
             this.checkBoxPrompt.UseVisualStyleBackColor = true;
@@ -72,33 +75,36 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 98);
+            this.label2.Location = new System.Drawing.Point(38, 151);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 13);
+            this.label2.Size = new System.Drawing.Size(166, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Presentation precision";
             // 
             // trackBarPrecision
             // 
-            this.trackBarPrecision.Location = new System.Drawing.Point(28, 123);
+            this.trackBarPrecision.Location = new System.Drawing.Point(42, 189);
+            this.trackBarPrecision.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.trackBarPrecision.Name = "trackBarPrecision";
-            this.trackBarPrecision.Size = new System.Drawing.Size(100, 45);
+            this.trackBarPrecision.Size = new System.Drawing.Size(150, 69);
             this.trackBarPrecision.TabIndex = 5;
             this.trackBarPrecision.Scroll += new System.EventHandler(this.trackBarPrecision_Scroll);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(224, 50);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Location = new System.Drawing.Point(336, 77);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(68, 20);
+            this.textBox1.Size = new System.Drawing.Size(100, 26);
             this.textBox1.TabIndex = 6;
+            this.textBox1.Visible = false;
             // 
             // buttonFormSetCancel
             // 
-            this.buttonFormSetCancel.Location = new System.Drawing.Point(28, 242);
+            this.buttonFormSetCancel.Location = new System.Drawing.Point(42, 372);
+            this.buttonFormSetCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonFormSetCancel.Name = "buttonFormSetCancel";
-            this.buttonFormSetCancel.Size = new System.Drawing.Size(114, 41);
+            this.buttonFormSetCancel.Size = new System.Drawing.Size(171, 63);
             this.buttonFormSetCancel.TabIndex = 7;
             this.buttonFormSetCancel.Text = "Cancel";
             this.buttonFormSetCancel.UseVisualStyleBackColor = true;
@@ -107,17 +113,18 @@
             // labelPrecision
             // 
             this.labelPrecision.AutoSize = true;
-            this.labelPrecision.Location = new System.Drawing.Point(135, 129);
+            this.labelPrecision.Location = new System.Drawing.Point(202, 198);
+            this.labelPrecision.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPrecision.Name = "labelPrecision";
-            this.labelPrecision.Size = new System.Drawing.Size(35, 13);
+            this.labelPrecision.Size = new System.Drawing.Size(51, 20);
             this.labelPrecision.TabIndex = 8;
             this.labelPrecision.Text = "label3";
             // 
             // FormSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(317, 292);
+            this.ClientSize = new System.Drawing.Size(476, 449);
             this.Controls.Add(this.labelPrecision);
             this.Controls.Add(this.buttonFormSetCancel);
             this.Controls.Add(this.textBox1);
@@ -126,7 +133,6 @@
             this.Controls.Add(this.checkBoxPrompt);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonFormSetOk);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormSettings";
             this.Text = "FormSettings";
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPrecision)).EndInit();
